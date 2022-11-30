@@ -6,7 +6,7 @@ import {
   HeaderContainer,
   InputHeader,
   Logo,
-} from './styled'
+} from './styles'
 
 export function Header() {
   return (

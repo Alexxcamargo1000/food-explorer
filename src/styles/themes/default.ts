@@ -24,4 +24,7 @@ export const defaultTheme = {
   'orange-100': '#FBA94C',
 
   'green-400': '#04D361',
+
+  linear: '180deg, #091E26 0%, #00131C 100%',
+  blackTransparent: 'rgba(0, 0, 0, 0.32)',
 }

@@ -1,4 +1,4 @@
-import { FooterContainer, LogoFood } from './styled'
+import { FooterContainer, LogoFood } from './styles'
 
 export function Footer() {
   return (
