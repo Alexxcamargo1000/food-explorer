@@ -12,6 +12,7 @@ export const HeaderContainer = styled.div`
   a {
     text-decoration: none;
     color: ${(props) => props.theme['gray-100']};
+    line-height: 1.6;
   }
 `
 
@@ -19,6 +20,10 @@ export const Logo = styled.div`
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  span {
+    font-size: 1.5rem;
+    color: ${(props) => props.theme['white-100']};
+  }
 `
 
 export const InputHeader = styled.div`
