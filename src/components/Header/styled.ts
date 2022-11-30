@@ -9,6 +9,15 @@ export const HeaderContainer = styled.div`
   align-items: center;
   background: ${(props) => props.theme['blue-600']};
 
+  > div {
+    width: 100%;
+    max-width: 70rem;
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+  }
+
   a {
     text-decoration: none;
     color: ${(props) => props.theme['gray-100']};
@@ -21,16 +30,17 @@ export const Logo = styled.div`
   align-items: center;
   gap: 0.75rem;
   span {
+    font-weight: bold;
     font-size: 1.5rem;
     color: ${(props) => props.theme['white-100']};
   }
 `
 
 export const InputHeader = styled.div`
+  flex: 1;
   display: flex;
   align-items: center;
   height: 3rem;
-  width: 400px;
   gap: 0.875rem; //14px
   padding-block: 0.75rem; //12px
   padding-inline: 0.875rem; //14px

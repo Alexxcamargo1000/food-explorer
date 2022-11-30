@@ -1,10 +1,10 @@
-import { FooterContainer } from './styled'
+import { FooterContainer, LogoFood } from './styled'
 
 export function Footer() {
   return (
     <FooterContainer>
       <div>
-        <div>
+        <LogoFood>
           <svg
             width="26"
             height="30"
@@ -20,10 +20,10 @@ export function Footer() {
           </svg>
 
           <span>food explorer</span>
-        </div>
+        </LogoFood>
 
         <div>
-          <span>© 2022 - Todos os direitos reservados.</span>
+          <p>© 2022 - Todos os direitos reservados.</p>
         </div>
       </div>
     </FooterContainer>

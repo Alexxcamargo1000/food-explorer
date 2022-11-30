@@ -31,5 +31,7 @@ export const GlobalStyle = createGlobalStyle`
 
   main {
     min-height: calc(100vh - (2 * 6.5rem));
+    max-width: 70rem;
+    margin: 0 auto;
   }
 `
