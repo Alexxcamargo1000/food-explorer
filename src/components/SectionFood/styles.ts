@@ -10,7 +10,8 @@ export const SectionHome = styled.section`
 
 export const CarrosselHome = styled.div`
   display: flex;
-  //gap: 1rem;
+  justify-content: flex-start;
+  gap: 1rem;
 `
 
 export const ContainerCarrossel = styled.div`

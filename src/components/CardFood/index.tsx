@@ -9,18 +9,29 @@ import {
 
 interface CardFoodProps {
   image: string
+  slug: string
+  title: string
+  description: string
+  price: number
   className: string
 }
 
-export function CardFood({ image, className }: CardFoodProps) {
+export function CardFood({
+  image,
+  description,
+  price,
+  title,
+  className,
+  slug,
+}: CardFoodProps) {
   return (
     <CardContainer className={className}>
-      <img src={image} alt="" />
-      <Title>Salada Ravanello {'>'} </Title>
-      <Description>
-        Rabanetes, folhas verdes e molho agridoce salpicados com gergelim
-      </Description>
-      <Price>R$ 49,97</Price>
+      <img src={`http://localhost:3333/foods/files/${image}`} alt="" />
+      <Title to={`/food/${slug}`}>
+        {title} {'>'}{' '}
+      </Title>
+      <Description>{description}</Description>
+      <Price>{price}</Price>
       <ButtonsContainer>
         <div>
           <button>

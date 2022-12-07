@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 export const CardContainer = styled.div`
@@ -24,10 +25,14 @@ export const CardContainer = styled.div`
   }
 `
 
-export const Title = styled.strong`
+export const Title = styled(Link)`
+  color: currentColor;
+  text-decoration: none;
   font-size: 1.5rem;
   font-family: 'Poppins', sans-serif;
   line-height: 1.4;
+  overflow: hidden;
+  white-space: nowrap;
 `
 
 export const Description = styled.p`
