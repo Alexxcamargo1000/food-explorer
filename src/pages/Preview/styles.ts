@@ -106,6 +106,7 @@ export const ButtonsControllers = styled.div`
     background-color: transparent;
     border: 0;
     font-size: 1.5rem;
+    line-height: 0.00001px;
 
     color: ${(props) => props.theme['white-100']};
   }
