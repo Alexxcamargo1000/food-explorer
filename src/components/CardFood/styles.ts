@@ -11,6 +11,7 @@ export const CardContainer = styled.div`
   width: 100%;
   max-width: 19rem; //304px
   background-color: ${(props) => props.theme.blackTransparent};
+  flex: none;
 
   button {
     font-weight: bold;
@@ -36,10 +37,17 @@ export const Title = styled(Link)`
 `
 
 export const Description = styled.p`
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  width: 100%;
   color: ${(props) => props.theme['gray-200']};
   font-size: 0.875rem;
   line-height: 1.6;
-  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `
 export const Price = styled.span`
   color: ${(props) => props.theme['blue-100']};
@@ -47,6 +55,8 @@ export const Price = styled.span`
   line-height: 1.6;
 `
 export const ButtonsContainer = styled.div`
+  z-index: 2;
+  min-height: 4rem;
   display: flex;
   align-items: center;
   justify-content: center;

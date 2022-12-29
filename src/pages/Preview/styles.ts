@@ -20,6 +20,7 @@ export const PreviewContainer = styled.div`
 export const FoodContainer = styled.div`
   display: flex;
   gap: 2.5rem;
+  margin-bottom: 4rem;
 
   img {
     max-width: 24rem;
@@ -57,6 +58,7 @@ export const IngredientsContainer = styled.ul`
 
     span {
       font-size: 1.125rem;
+      text-align: center;
     }
   }
 

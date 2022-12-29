@@ -79,7 +79,6 @@ export function Home() {
                         price={food.priceInCents}
                         title={food.name}
                         slug={food.slug}
-                        className="keen-slider__slide"
                       />
                     )
                   }

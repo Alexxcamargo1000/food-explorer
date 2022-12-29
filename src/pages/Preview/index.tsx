@@ -1,8 +1,3 @@
-import foodImg from '../../assets/food.png'
-import ingredient1 from '../../assets/ingredient-2.png'
-import ingredient2 from '../../assets/ingredient-4.png'
-import ingredient3 from '../../assets/ingredient-3.png'
-import ingredient4 from '../../assets/ingredient-1.png'
 import { CaretLeft, Minus, Plus, Receipt } from 'phosphor-react'
 import {
   ButtonsControllers,
@@ -12,65 +7,120 @@ import {
   PreviewContainer,
   PriceContainer,
 } from './styles'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { api } from '../../services/api'
+import { formatPriceToReal } from '../../utils/format-price-to-real'
+import { Loading } from '../../components/Loading'
+
+interface foodProps {
+  created_at: string
+  description: string
+  id: string
+  image: string
+  name: string
+  priceInCents: number
+  slug: string
+  type_of_food_id: string
+  updated_at: string
+  user_id: string
+}
+
+interface ingredientProps {
+  id: string
+  image: string
+  name: string
+}
+
+interface foodWithIngredients {
+  food: foodProps
+  ingredients: ingredientProps[]
+}
 
 export function Preview() {
+  const navigate = useNavigate()
+  const { slug } = useParams()
+  const [isLoading, isSetLoading] = useState(false)
+
+  const [foodWithIngredient, setFoodWithIngredient] =
+    useState<foodWithIngredients>({
+      food: {} as foodProps,
+      ingredients: [],
+    })
+
+  const { food, ingredients } = foodWithIngredient
+
+  const priceFormatted = formatPriceToReal(food.priceInCents)
+
+  function handleBackNavigate() {
+    navigate(-1)
+  }
+
+  useEffect(() => {
+    async function getFood() {
+      const response = await api.get(`/foods/${slug}`)
+
+      setFoodWithIngredient(response.data)
+      isSetLoading(true)
+    }
+
+    getFood()
+  }, [slug])
   return (
     <main>
-      <PreviewContainer>
-        <button>
-          <CaretLeft size={32} />
-          Voltar
-        </button>
+      {!isLoading ? (
+        <Loading />
+      ) : (
+        <PreviewContainer>
+          <button onClick={handleBackNavigate}>
+            <CaretLeft size={32} />
+            Voltar
+          </button>
 
-        <FoodContainer>
-          <img src={foodImg} alt="" />
+          <FoodContainer>
+            <img
+              src={`${api.defaults.baseURL}/foods/files/${food.image}`}
+              alt=""
+            />
 
-          <FoodContent>
-            <h1>Salada Ravanello</h1>
-            <p>
-              Rabanetes, folhas verdes e molho agridoce salpicados com gergelim.
-            </p>
+            <FoodContent>
+              <h1>{food.name}</h1>
+              <p>{food.description}</p>
 
-            <IngredientsContainer>
-              <li>
-                <img src={ingredient1} alt="" />
-                <span>alface</span>
-              </li>
-              <li>
-                <img src={ingredient2} alt="" />
-                <span>tomate</span>
-              </li>
-              <li>
-                <img src={ingredient3} alt="" />
-                <span>rabanete</span>
-              </li>
-              <li>
-                <img src={ingredient4} alt="" />
-                <span>pao naan</span>
-              </li>
-            </IngredientsContainer>
+              <IngredientsContainer>
+                {ingredients.map((ingredient) => (
+                  <li key={ingredient.id}>
+                    <img
+                      src={`${api.defaults.baseURL}/ingredients/files/${ingredient.image}`}
+                      alt=""
+                    />
+                    <span>{ingredient.name}</span>
+                  </li>
+                ))}
+              </IngredientsContainer>
 
-            <PriceContainer>
-              <span className="price">R$ 25,97</span>
-              <div>
-                <ButtonsControllers>
+              <PriceContainer>
+                <span className="price">{priceFormatted}</span>
+                <div>
+                  <ButtonsControllers>
+                    <button>
+                      <Minus />
+                    </button>
+                    <span>01</span>
+                    <button>
+                      <Plus />
+                    </button>
+                  </ButtonsControllers>
                   <button>
-                    <Minus />
+                    <Receipt size={32} />
+                    incluir
                   </button>
-                  <span>01</span>
-                  <button>
-                    <Plus />
-                  </button>
-                </ButtonsControllers>
-                <button>
-                  <Receipt size={32} />
-                  incluir
-                </button>
-              </div>
-            </PriceContainer>
-          </FoodContent>
-        </FoodContainer>
-      </PreviewContainer>
+                </div>
+              </PriceContainer>
+            </FoodContent>
+          </FoodContainer>
+        </PreviewContainer>
+      )}
     </main>
   )
 }

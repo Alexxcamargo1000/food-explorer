@@ -1,4 +1,6 @@
 import { Minus, Plus } from 'phosphor-react'
+import { api } from '../../services/api'
+import { formatPriceToReal } from '../../utils/format-price-to-real'
 import {
   CardContainer,
   Title,
@@ -13,7 +15,6 @@ interface CardFoodProps {
   title: string
   description: string
   price: number
-  className: string
 }
 
 export function CardFood({
@@ -21,17 +22,18 @@ export function CardFood({
   description,
   price,
   title,
-  className,
   slug,
 }: CardFoodProps) {
+  const priceFormatted = formatPriceToReal(price)
+
   return (
-    <CardContainer className={className}>
-      <img src={`http://localhost:3333/foods/files/${image}`} alt="" />
+    <CardContainer>
+      <img src={`${api.defaults.baseURL}/foods/files/${image}`} alt="" />
       <Title to={`/food/${slug}`}>
         {title} {'>'}{' '}
       </Title>
       <Description>{description}</Description>
-      <Price>{price}</Price>
+      <Price>{priceFormatted}</Price>
       <ButtonsContainer>
         <div>
           <button>
