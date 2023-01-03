@@ -1,10 +1,10 @@
 import { Input } from '../../components/Input'
-import { SignInContainer, SignInForm, SignInLogo } from './styles'
+import { SingInContainer, SingInForm, SingInLogo } from './styles'
 
-export function SignInPage() {
+export function SingInPage() {
   return (
-    <SignInContainer>
-      <SignInLogo>
+    <SingInContainer>
+      <SingInLogo>
         <svg
           width="44"
           height="48"
@@ -18,9 +18,9 @@ export function SignInPage() {
           />
         </svg>
         <h1>food explorer</h1>
-      </SignInLogo>
-      <SignInForm.Container>
-        <SignInForm.Title>Faça login</SignInForm.Title>
+      </SingInLogo>
+      <SingInForm.Container>
+        <SingInForm.Title>Faça login</SingInForm.Title>
         <Input
           type={'email'}
           title="Email"
@@ -32,9 +32,11 @@ export function SignInPage() {
           placeholder="No mínimo 8 caracteres"
         />
 
-        <SignInForm.Button type="submit">Entrar</SignInForm.Button>
-        <SignInForm.FormLink to="#"> Criar uma conta</SignInForm.FormLink>
-      </SignInForm.Container>
-    </SignInContainer>
+        <SingInForm.Button type="submit">Entrar</SingInForm.Button>
+        <SingInForm.FormLink to="/register">
+          Criar uma conta
+        </SingInForm.FormLink>
+      </SingInForm.Container>
+    </SingInContainer>
   )
 }

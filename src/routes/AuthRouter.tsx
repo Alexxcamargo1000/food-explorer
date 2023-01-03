@@ -1,10 +1,10 @@
 import { Routes, Route } from 'react-router-dom'
-import { SignInPage } from '../pages/SignIn'
+import { SingInPage } from '../pages/SingIn'
 
 export function AuthRouter() {
   return (
     <Routes>
-      <Route path="/" element={<SignInPage />} />
+      <Route path="/" element={<SingInPage />} />
     </Routes>
   )
 }
