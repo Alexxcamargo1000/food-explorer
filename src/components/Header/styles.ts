@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 export const HeaderContainer = styled.div`
@@ -25,7 +26,7 @@ export const HeaderContainer = styled.div`
   }
 `
 
-export const Logo = styled.div`
+export const Logo = styled(Link)`
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -80,7 +81,7 @@ export const InputHeader = styled.div`
   }
 `
 
-export const ButtonHeader = styled.a`
+export const ButtonHeader = styled(Link)`
   background-color: ${(props) => props.theme['red-500']};
   color: ${(props) => props.theme['white-100']};
   border: 0;

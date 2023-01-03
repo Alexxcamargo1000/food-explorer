@@ -12,7 +12,7 @@ export function Header() {
   return (
     <HeaderContainer>
       <div>
-        <Logo>
+        <Logo to="/">
           <svg
             width="27"
             height="30"
@@ -41,7 +41,7 @@ export function Header() {
           />
         </InputHeader>
 
-        <ButtonHeader>
+        <ButtonHeader to="order">
           <Receipt size={24} />
           Meu pedido (0)
         </ButtonHeader>
