@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-export const SingInContainer = styled.div`
+export const SingUpContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 40rem;
   place-items: center;
   height: 100vh;
 `
-export const SingInLogo = styled.div`
+export const SingUpLogo = styled.div`
   display: flex;
   gap: 1.5rem;
 `
@@ -58,7 +58,7 @@ const FormLink = styled(Link)`
   }
 `
 
-export const SingInForm = {
+export const SingUpForm = {
   Container,
   Title,
   Button,
