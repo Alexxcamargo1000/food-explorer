@@ -15,7 +15,7 @@ export const HeaderContainer = styled.div`
     max-width: 70rem;
     display: flex;
     gap: 2rem;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
   }
 
@@ -108,5 +108,14 @@ export const ButtonSingOut = styled.button`
 
   &:hover {
     color: ${(props) => props.theme['gray-200']};
+  }
+`
+
+export const HeaderButtons = styled.div`
+  display: flex;
+  gap: 1rem;
+
+  a {
+    align-self: center;
   }
 `

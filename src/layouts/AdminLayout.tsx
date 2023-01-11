@@ -1,11 +1,11 @@
 import { Outlet } from 'react-router-dom'
 import { Footer } from '../components/Footer'
-import { Header } from '../components/Header'
+import { HeaderAdmin } from '../components/Header/admin'
 
-export function DefaultLayout() {
+export function AdminLayout() {
   return (
     <div>
-      <Header />
+      <HeaderAdmin />
       <Outlet />
       <Footer />
     </div>

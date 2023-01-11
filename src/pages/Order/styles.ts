@@ -5,6 +5,7 @@ export const ContainerOrder = styled.main`
 
   table {
     margin-top: 2rem;
+    margin-bottom: 4rem;
     width: 100%;
     border-collapse: collapse;
 

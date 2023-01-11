@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const PreviewContainer = styled.div`
   padding-top: 1.5rem;
+
   > button {
     background: transparent;
     border: 0;
@@ -20,7 +21,7 @@ export const PreviewContainer = styled.div`
 export const FoodContainer = styled.div`
   display: flex;
   gap: 2.5rem;
-  margin-bottom: 4rem;
+  padding-bottom: 4rem;
 
   img {
     max-width: 24rem;
