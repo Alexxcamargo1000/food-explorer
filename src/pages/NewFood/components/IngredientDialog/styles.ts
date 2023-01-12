@@ -66,14 +66,24 @@ export const IngredientButton = styled.button`
   border-radius: 4px;
   border: none;
   cursor: pointer;
-  background-color: ${(props) => props.theme['blue-200']};
-  color: ${(props) => props.theme['blue-100']};
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   align-items: center;
   justify-content: center;
   transition: background 0.2s, color 0.4s;
+  background-color: ${(props) => props.theme['blue-200']};
+  color: ${(props) => props.theme['blue-400']};
+
+  &.checked {
+    background-color: ${(props) => props.theme['blue-400']};
+    color: ${(props) => props.theme['white-100']};
+
+    &:hover {
+      background-color: ${(props) => props.theme['blue-400']};
+      color: ${(props) => props.theme['white-100']};
+    }
+  }
 
   &:hover {
     background-color: ${(props) => props.theme['blue-400']};

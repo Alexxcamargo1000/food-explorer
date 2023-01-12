@@ -1,11 +1,36 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import { CaretLeft, Plus, UploadSimple, X } from 'phosphor-react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Input } from '../../components/Input'
 import { IngredientDialog } from './components/IngredientDialog'
-import { NewFoodContainer, NewFoodForm as Form } from './styles'
+import { NewFoodContainer, NewFoodForm as Form, Price } from './styles'
+
+export interface IngredientProps {
+  id: string
+  image: string
+  name: string
+}
 
 export function NewFood() {
+  const [ingredients, setIngredients] = useState<IngredientProps[]>([])
+
+  function handleCheckedIngredient(ingredientsDialog: IngredientProps[]) {
+    setIngredients((prevState) => [...prevState, ...ingredientsDialog])
+  }
+
+  function handleRemoveIngredient(name: string) {
+    const filterIngredientByName = ingredients.filter(
+      (ingredient) => ingredient.name !== name,
+    )
+
+    setIngredients(filterIngredientByName)
+  }
+
+  function handleClearIngredient() {
+    setIngredients([])
+  }
+
   return (
     <NewFoodContainer>
       <Link to="/">
@@ -13,6 +38,7 @@ export function NewFood() {
       </Link>
 
       <h1>Editar Prato</h1>
+
       <Dialog.Root>
         <Form.Root>
           <Form.Fieldset>
@@ -33,23 +59,28 @@ export function NewFood() {
             <Form.IngredientsRoot>
               <label htmlFor="">Ingredientes</label>
               <Form.IngredientsWrapper>
-                <Form.Ingredient>
-                  <span>Pão Naan</span>
-                  <button>
-                    <X size={16} />
-                  </button>
-                </Form.Ingredient>
+                {ingredients.map((ingredient) => (
+                  <Form.Ingredient key={ingredient.id}>
+                    <span>{ingredient.name}</span>
+
+                    <button
+                      onClick={() => handleRemoveIngredient(ingredient.name)}
+                    >
+                      <X size={16} />
+                    </button>
+                  </Form.Ingredient>
+                ))}
                 <Dialog.Trigger asChild>
-                  <Form.NewIngredient>
+                  <Form.NewIngredient onClick={handleClearIngredient}>
                     <span>Adicionar</span> <Plus />
                   </Form.NewIngredient>
                 </Dialog.Trigger>
               </Form.IngredientsWrapper>
             </Form.IngredientsRoot>
 
-            <div className="price">
+            <Price>
               <Input title="Preço" placeholder="R$ 00,00" />
-            </div>
+            </Price>
           </Form.Fieldset>
 
           <Form.Fieldset>
@@ -61,7 +92,10 @@ export function NewFood() {
 
           <Form.Button>Adicionar pedido</Form.Button>
         </Form.Root>
-        <IngredientDialog />
+        <IngredientDialog
+          handleCheckedIngredient={handleCheckedIngredient}
+          ingredientsChecked={ingredients}
+        />
       </Dialog.Root>
     </NewFoodContainer>
   )

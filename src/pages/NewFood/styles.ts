@@ -71,13 +71,14 @@ const IngredientsRoot = styled.div`
 const IngredientsWrapper = styled.div`
   margin-top: 0.5rem;
   display: flex;
-  max-height: 46px;
+  flex-wrap: wrap;
   gap: 1rem;
-  height: 3rem;
+  min-height: 3rem;
   align-items: center;
   justify-content: flex-start;
   border: 1px solid ${(props) => props.theme['white-100']};
   padding-inline: 0.5rem;
+  padding-block: 0.5rem;
   border-radius: 4px;
 `
 
@@ -92,6 +93,9 @@ const Ingredient = styled.div`
   max-height: 2rem;
   border-radius: 4px;
   transition: opacity 0.2s;
+  span {
+    display: block;
+  }
 
   &:has(button:hover) {
     opacity: 0.8;
@@ -175,3 +179,11 @@ export const NewFoodForm = {
   Ingredient,
   NewIngredient,
 }
+
+export const Price = styled.div`
+  height: 100%;
+
+  input {
+    min-height: 3.1rem;
+  }
+`

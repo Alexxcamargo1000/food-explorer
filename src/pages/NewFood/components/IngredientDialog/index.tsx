@@ -1,6 +1,6 @@
 import * as Dialog from '@radix-ui/react-dialog'
+import React, { useEffect, useState } from 'react'
 import { MagnifyingGlass, X } from 'phosphor-react'
-import { useEffect, useState } from 'react'
 import { Input } from '../../../../components/Input'
 import { Loading } from '../../../../components/Loading'
 import { api } from '../../../../services/api'
@@ -16,17 +16,49 @@ import {
   Overlay,
   SearchContainer,
 } from './styles'
+import { IngredientProps } from '../..'
 
-interface IngredientProps {
-  id: string
-  image: string
-  name: string
+interface IngredientDialogProps {
+  handleCheckedIngredient: (ingredient: IngredientProps[]) => void
+  ingredientsChecked: IngredientProps[]
 }
-export function IngredientDialog() {
-  const [isLoading, isSetLoading] = useState(false)
+export function IngredientDialog(props: IngredientDialogProps) {
   const [search, setSearch] = useState('')
+  const [isLoading, isSetLoading] = useState(false)
+  const [ingredientName, setIngredientName] = useState<string[]>([])
 
   const [ingredients, setIngredients] = useState<IngredientProps[]>([])
+
+  function handleState(e: React.MouseEvent<HTMLButtonElement>) {
+    e.currentTarget.classList.toggle('checked')
+
+    if (!e.currentTarget.className.includes('checked')) {
+      const name = e.currentTarget.value
+
+      const filterIngredientByName = ingredientName.filter(
+        (ingredient) => ingredient !== name,
+      )
+
+      setIngredientName(filterIngredientByName)
+    } else {
+      setIngredientName((prevState) => [...prevState, e.currentTarget.value])
+    }
+  }
+
+  function handleAddIngredients() {
+    const findByName = ingredientName.map((name) => {
+      const filter = ingredients.filter(
+        (ingredient) => ingredient.name === name,
+      )
+      return filter
+    })
+    let concatFindByName: IngredientProps[] = []
+    concatFindByName = concatFindByName.concat(...findByName)
+
+    props.handleCheckedIngredient(concatFindByName)
+
+    setIngredientName([])
+  }
 
   useEffect(() => {
     async function getIngredients() {
@@ -60,7 +92,10 @@ export function IngredientDialog() {
             <ListIngredient>
               {ingredients.map((ingredient) => (
                 <li key={ingredient.id}>
-                  <IngredientButton>
+                  <IngredientButton
+                    onClick={handleState}
+                    value={ingredient.name}
+                  >
                     <img
                       src={`${api.defaults.baseURL}/ingredients/files/${ingredient.image}`}
                       alt={ingredient.name}
@@ -75,7 +110,7 @@ export function IngredientDialog() {
 
         <DialogButtonsContainer>
           <Dialog.Close asChild>
-            <ButtonAdd>Adicionar</ButtonAdd>
+            <ButtonAdd onClick={handleAddIngredients}>Adicionar</ButtonAdd>
           </Dialog.Close>
           <Dialog.Close asChild>
             <ButtonCancel aria-label="Close">Cancelar</ButtonCancel>
