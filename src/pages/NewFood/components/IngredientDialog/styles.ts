@@ -1,4 +1,5 @@
 import { DialogContent, DialogOverlay, Portal } from '@radix-ui/react-dialog'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 export const IngredientDialogContainer = styled(Portal)``
@@ -75,7 +76,12 @@ export const IngredientButton = styled.button`
   background-color: ${(props) => props.theme['blue-200']};
   color: ${(props) => props.theme['blue-400']};
 
-  &.checked {
+  &:disabled {
+    opacity: 0.3;
+    background-color: ${(props) => props.theme['blue-200']};
+  }
+
+  &:not(:disabled).checked {
     background-color: ${(props) => props.theme['blue-400']};
     color: ${(props) => props.theme['white-100']};
 
@@ -123,9 +129,27 @@ export const ButtonAdd = styled(ButtonDefault)`
   color: ${(props) => props.theme['blue-800']};
 `
 
-export const ButtonCancel = styled(ButtonDefault)`
-  background-color: ${(props) => props.theme['red-300']};
-  color: ${(props) => props.theme['white-100']};
+export const LinkNewIngredient = styled(Link)`
+  width: 100%;
+  height: 3rem;
+  padding-block: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, border-color 0.4s;
+  background-color: ${(props) => props.theme['gray-100']};
+  border: 1px solid ${(props) => props.theme['blue-100']};
+  color: ${(props) => props.theme['blue-900']};
+
+  &:hover {
+    background-color: ${(props) => props.theme['blue-600']};
+    border-color: ${(props) => props.theme['green-400']};
+    color: ${(props) => props.theme['white-200']};
+  }
 `
 
 export const ButtonClose = styled.button`

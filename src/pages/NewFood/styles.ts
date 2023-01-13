@@ -3,6 +3,14 @@ import styled from 'styled-components'
 export const NewFoodContainer = styled.main`
   padding-top: 1.5rem;
 
+  .empty {
+    border-color: ${(props) => props.theme['red-500']};
+  }
+
+  .notEmpty {
+    border-color: ${(props) => props.theme['green-400']};
+  }
+
   > a {
     color: currentColor;
     display: flex;
@@ -162,6 +170,11 @@ const Button = styled.button`
   border: 1px solid ${(props) => props.theme['white-100']};
   border-radius: 4px;
   transition: background-color 0.2s;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.1;
+  }
 
   &:hover {
     background-color: rgba(255, 255, 255, 0.2);

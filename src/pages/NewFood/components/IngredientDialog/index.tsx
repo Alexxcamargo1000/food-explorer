@@ -1,17 +1,17 @@
 import * as Dialog from '@radix-ui/react-dialog'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { MagnifyingGlass, X } from 'phosphor-react'
 import { Input } from '../../../../components/Input'
-import { Loading } from '../../../../components/Loading'
+
 import { api } from '../../../../services/api'
 import {
   ButtonAdd,
-  ButtonCancel,
   ButtonClose,
   Content,
   DialogButtonsContainer,
   IngredientButton,
   IngredientDialogContainer,
+  LinkNewIngredient,
   ListIngredient,
   Overlay,
   SearchContainer,
@@ -20,55 +20,55 @@ import { IngredientProps } from '../..'
 
 interface IngredientDialogProps {
   handleCheckedIngredient: (ingredient: IngredientProps[]) => void
-  ingredientsChecked: IngredientProps[]
+  ingredients: IngredientProps[]
+  ingredientsActive: IngredientProps[]
+  handleSearch: (search: string) => void
+  search: string
 }
 export function IngredientDialog(props: IngredientDialogProps) {
-  const [search, setSearch] = useState('')
-  const [isLoading, isSetLoading] = useState(false)
-  const [ingredientName, setIngredientName] = useState<string[]>([])
+  const [ingredientsChecked, setIngredientChecked] = useState<
+    IngredientProps[]
+  >([])
 
-  const [ingredients, setIngredients] = useState<IngredientProps[]>([])
+  function handleIngredientChecked(
+    event: React.MouseEvent<HTMLButtonElement>,
+    ingredient: IngredientProps,
+  ) {
+    event.currentTarget.classList.add(`checked`)
+    const findIngredientCheckedExist = ingredientsChecked.find(
+      ({ name }) => name === ingredient.name,
+    )
 
-  function handleState(e: React.MouseEvent<HTMLButtonElement>) {
-    e.currentTarget.classList.toggle('checked')
+    if (findIngredientCheckedExist) {
+      event.currentTarget.classList.remove(`checked`)
 
-    if (!e.currentTarget.className.includes('checked')) {
-      const name = e.currentTarget.value
+      const removeIngredientChecked = ingredientsChecked.filter(
+        (ingredient) => ingredient.name !== findIngredientCheckedExist.name,
+      )
+      return setIngredientChecked(removeIngredientChecked)
+    }
 
-      const filterIngredientByName = ingredientName.filter(
-        (ingredient) => ingredient !== name,
+    if (props.ingredientsActive.length > 0) {
+      const findIngredientActive = props.ingredientsActive.find(
+        (ingre) => ingre.name === ingredient.name,
       )
 
-      setIngredientName(filterIngredientByName)
+      if (!findIngredientActive) {
+        setIngredientChecked((prevState) => [...prevState, ingredient])
+      } else {
+        event.currentTarget.classList.remove(`checked`)
+
+        event.currentTarget.disabled = true
+      }
     } else {
-      setIngredientName((prevState) => [...prevState, e.currentTarget.value])
+      setIngredientChecked((prevState) => [...prevState, ingredient])
     }
   }
 
-  function handleAddIngredients() {
-    const findByName = ingredientName.map((name) => {
-      const filter = ingredients.filter(
-        (ingredient) => ingredient.name === name,
-      )
-      return filter
-    })
-    let concatFindByName: IngredientProps[] = []
-    concatFindByName = concatFindByName.concat(...findByName)
-
-    props.handleCheckedIngredient(concatFindByName)
-
-    setIngredientName([])
+  function handleAddIngredient() {
+    props.handleCheckedIngredient(ingredientsChecked)
+    setIngredientChecked([])
   }
-
-  useEffect(() => {
-    async function getIngredients() {
-      const response = await api.get(`/ingredients?name=${search}`)
-      setIngredients(response.data)
-      isSetLoading(true)
-    }
-
-    getIngredients()
-  }, [search])
 
   return (
     <IngredientDialogContainer>
@@ -80,45 +80,47 @@ export function IngredientDialog(props: IngredientDialogProps) {
             placeholder="Buscar "
             title="search"
             hasNotLabel
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            value={props.search}
+            onChange={(e) => props.handleSearch(e.target.value)}
           />
         </SearchContainer>
         <Dialog.Title className="DialogTitle">Ingredients</Dialog.Title>
         <div>
-          {!isLoading ? (
-            <Loading />
-          ) : (
-            <ListIngredient>
-              {ingredients.map((ingredient) => (
-                <li key={ingredient.id}>
-                  <IngredientButton
-                    onClick={handleState}
-                    value={ingredient.name}
-                  >
-                    <img
-                      src={`${api.defaults.baseURL}/ingredients/files/${ingredient.image}`}
-                      alt={ingredient.name}
-                    />
-                    {ingredient.name}
-                  </IngredientButton>
-                </li>
-              ))}
-            </ListIngredient>
-          )}
+          <ListIngredient>
+            {props.ingredients.map((ingredient) => (
+              <li key={ingredient.id}>
+                <IngredientButton
+                  onClick={(
+                    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+                  ) => handleIngredientChecked(e, ingredient)}
+                >
+                  <img
+                    src={`${api.defaults.baseURL}/ingredients/files/${ingredient.image}`}
+                    alt={ingredient.name}
+                  />
+                  {ingredient.name}
+                </IngredientButton>
+              </li>
+            ))}
+          </ListIngredient>
         </div>
 
         <DialogButtonsContainer>
           <Dialog.Close asChild>
-            <ButtonAdd onClick={handleAddIngredients}>Adicionar</ButtonAdd>
+            <ButtonAdd onClick={handleAddIngredient}>Salvar</ButtonAdd>
           </Dialog.Close>
           <Dialog.Close asChild>
-            <ButtonCancel aria-label="Close">Cancelar</ButtonCancel>
+            <LinkNewIngredient to="/admin/ingredient/new">
+              Adicionar Ingrediente
+            </LinkNewIngredient>
           </Dialog.Close>
         </DialogButtonsContainer>
 
         <Dialog.Close asChild>
-          <ButtonClose aria-label="Close">
+          <ButtonClose
+            aria-label="Close"
+            onClick={() => setIngredientChecked([])}
+          >
             <X size={24} />
           </ButtonClose>
         </Dialog.Close>
