@@ -2,9 +2,10 @@ import styled from 'styled-components'
 
 export const NewFoodContainer = styled.main`
   padding-top: 1.5rem;
+  padding-inline: 1rem;
 
   .empty {
-    border-color: ${(props) => props.theme['red-500']};
+    //  border-color: ${(props) => props.theme['red-500']};
   }
 
   .notEmpty {
@@ -42,6 +43,23 @@ const Fieldset = styled.fieldset`
     flex-direction: column;
     gap: 1rem;
     width: 100%;
+  }
+
+  select {
+    background-color: transparent;
+    padding-inline: 0.875rem;
+    padding-block: 0.75rem;
+    height: 45px;
+    align-self: flex-end;
+    color: ${(props) => props.theme['white-200']};
+    border-radius: 4px;
+    border: 1px solid ${(props) => props.theme['white-100']};
+    cursor: pointer;
+
+    option {
+      padding: 1rem;
+      background-color: ${(props) => props.theme['blue-700']};
+    }
   }
 `
 

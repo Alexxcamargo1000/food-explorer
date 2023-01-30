@@ -111,7 +111,7 @@ export function IngredientDialog(props: IngredientDialogProps) {
           </Dialog.Close>
           <Dialog.Close asChild>
             <LinkNewIngredient to="/admin/ingredient/new">
-              Adicionar Ingrediente
+              Adicionar ou excluir
             </LinkNewIngredient>
           </Dialog.Close>
         </DialogButtonsContainer>

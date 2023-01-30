@@ -1,10 +1,11 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import { CaretLeft, Plus, UploadSimple, X } from 'phosphor-react'
-import { useEffect, useState } from 'react'
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Input } from '../../components/Input'
 import { Loading } from '../../components/Loading'
 import { api } from '../../services/api'
+import { formatPriceToCents } from '../../utils/format-price-to-cents'
 import { IngredientDialog } from './components/IngredientDialog'
 import { NewFoodContainer, NewFoodForm as Form, Price } from './styles'
 
@@ -15,13 +16,14 @@ export interface IngredientProps {
 }
 
 export function NewFood() {
-  const [search, setSearch] = useState('')
-  const [ingredients, setIngredients] = useState<IngredientProps[]>([])
-  const [isLoading, setIsLoading] = useState(false)
-  const [image, setImage] = useState('')
   const [name, setName] = useState('')
   const [price, setPrice] = useState('')
+  const [search, setSearch] = useState('')
+  const [typeOfFood, setTypeOfFood] = useState('')
+  const [image, setImage] = useState<File>()
+  const [isLoading, setIsLoading] = useState(false)
   const [description, setDescription] = useState('')
+  const [ingredients, setIngredients] = useState<IngredientProps[]>([])
   const [ingredientsActive, setIngredientsActive] = useState<IngredientProps[]>(
     [],
   )
@@ -41,12 +43,43 @@ export function NewFood() {
   function handleSearch(search: string) {
     setSearch(search)
   }
-  const validate =
-    image.length > 0 &&
-    name.length >= 3 &&
-    description.length >= 10 &&
-    ingredientsActive.length > 0 &&
-    price.length > 3
+
+  function handleChangeImage(event: ChangeEvent<HTMLInputElement>) {
+    if (event.target.files!.length < 1) {
+      return
+    }
+    const file = event.target.files![0]
+    setImage(file)
+  }
+
+  async function handleSubmitFood(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+
+    const priceInCents = formatPriceToCents(price)
+
+    if (
+      !name ||
+      !description ||
+      !typeOfFood ||
+      ingredientsActive.length === 0 ||
+      !image ||
+      !priceInCents
+    ) {
+      alert('preencha todos os campos')
+      return
+    }
+
+    const newFood = {
+      name,
+      description,
+      priceInCents,
+      typeOfFood,
+      image,
+      ingredientsActive,
+    }
+
+    console.log(newFood)
+  }
 
   useEffect(() => {
     async function getIngredients() {
@@ -63,13 +96,13 @@ export function NewFood() {
         <CaretLeft size={32} /> voltar
       </Link>
 
-      <h1>Editar Prato</h1>
+      <h1>Adicionar Prato</h1>
 
       {!isLoading ? (
         <Loading />
       ) : (
         <Dialog.Root>
-          <Form.Root>
+          <Form.Root onSubmit={(e) => handleSubmitFood(e)}>
             <Form.Fieldset>
               <div>
                 <span>Imagem do prato</span>
@@ -79,11 +112,10 @@ export function NewFood() {
                     <span>Selecione imagem</span>
                   </label>
                   <input
-                    value={image}
                     type="file"
                     id="image"
                     name="image"
-                    onChange={(e) => setImage(e.target.value)}
+                    onChange={(e) => handleChangeImage(e)}
                   />
                 </Form.InputImage>
               </div>
@@ -94,6 +126,20 @@ export function NewFood() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
+              <select
+                defaultValue="Selecione um tipo"
+                onChange={(e) => setTypeOfFood(e.target.value)}
+                className={!typeOfFood ? 'empty' : 'notEmpty'}
+              >
+                <option value="Selecione um tipo" disabled>
+                  Selecione um tipo
+                </option>
+                <option defaultValue="Pratos Principais">
+                  Pratos Principais
+                </option>
+                <option value="Sobremesa">Sobremesa</option>
+                <option value="Bebidas">Bebidas</option>
+              </select>
             </Form.Fieldset>
 
             <Form.Fieldset>
@@ -125,7 +171,7 @@ export function NewFood() {
 
               <Price>
                 <Input
-                  className={price.length < 4 ? 'empty' : 'notEmpty'}
+                  className={!price ? 'empty' : 'notEmpty'}
                   title="Preço"
                   placeholder="R$ 00,00"
                   value={price}
@@ -138,7 +184,7 @@ export function NewFood() {
               <div className="textarea-wrapper">
                 <label htmlFor="description">Descrição </label>
                 <Form.TextArea
-                  className={description.length < 10 ? 'empty' : 'notEmpty'}
+                  className={!description ? 'empty' : 'notEmpty'}
                   onChange={(e) => setDescription(e.target.value)}
                   value={description}
                   placeholder="Fale brevemente sobre o prato, seus ingredientes e composição"
@@ -146,7 +192,7 @@ export function NewFood() {
               </div>
             </Form.Fieldset>
 
-            <Form.Button disabled={!validate}>Adicionar pedido</Form.Button>
+            <Form.Button>Adicionar pedido</Form.Button>
           </Form.Root>
           <IngredientDialog
             handleCheckedIngredient={handleCheckedIngredient}

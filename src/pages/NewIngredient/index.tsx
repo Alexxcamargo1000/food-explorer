@@ -3,7 +3,7 @@ import { NewIngredientContainer } from './styles'
 export function NewIngredient() {
   return (
     <NewIngredientContainer>
-      <h1>new ingredient</h1>
+      <h2>Adicionar um novo ingrediente</h2>
     </NewIngredientContainer>
   )
 }
