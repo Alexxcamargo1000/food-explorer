@@ -41,6 +41,7 @@ export function Preview() {
   const navigate = useNavigate()
   const { slug } = useParams()
   const [isLoading, isSetLoading] = useState(false)
+  const [amountFood, setAmountFood] = useState(1)
 
   const [foodWithIngredient, setFoodWithIngredient] =
     useState<foodWithIngredients>({
@@ -50,10 +51,20 @@ export function Preview() {
 
   const { food, ingredients } = foodWithIngredient
 
-  const priceFormatted = formatPriceToReal(food.priceInCents)
+  const priceFormatted = formatPriceToReal(food.priceInCents * amountFood)
 
   function handleBackNavigate() {
     navigate(-1)
+  }
+
+  function handlePlusAmountFood() {
+    setAmountFood((numb) => numb + 1)
+  }
+
+  function handleMinusAmountFood() {
+    if (amountFood !== 1) {
+      setAmountFood((numb) => numb - 1)
+    }
   }
 
   useEffect(() => {
@@ -67,60 +78,60 @@ export function Preview() {
     getFood()
   }, [slug])
   return (
-    <main>
+    <PreviewContainer>
+      <div className="back">
+        <button onClick={handleBackNavigate}>
+          <CaretLeft size={32} />
+          Voltar
+        </button>
+      </div>
+
       {!isLoading ? (
         <Loading />
       ) : (
-        <PreviewContainer>
-          <button onClick={handleBackNavigate}>
-            <CaretLeft size={32} />
-            Voltar
-          </button>
+        <FoodContainer>
+          <img
+            src={`${api.defaults.baseURL}/foods/files/${food.image}`}
+            alt=""
+          />
 
-          <FoodContainer>
-            <img
-              src={`${api.defaults.baseURL}/foods/files/${food.image}`}
-              alt=""
-            />
+          <FoodContent>
+            <h1>{food.name}</h1>
+            <p>{food.description}</p>
 
-            <FoodContent>
-              <h1>{food.name}</h1>
-              <p>{food.description}</p>
+            <IngredientsContainer>
+              {ingredients.map((ingredient) => (
+                <li key={ingredient.id}>
+                  <img
+                    src={`${api.defaults.baseURL}/ingredients/files/${ingredient.image}`}
+                    alt=""
+                  />
+                  <span>{ingredient.name}</span>
+                </li>
+              ))}
+            </IngredientsContainer>
 
-              <IngredientsContainer>
-                {ingredients.map((ingredient) => (
-                  <li key={ingredient.id}>
-                    <img
-                      src={`${api.defaults.baseURL}/ingredients/files/${ingredient.image}`}
-                      alt=""
-                    />
-                    <span>{ingredient.name}</span>
-                  </li>
-                ))}
-              </IngredientsContainer>
-
-              <PriceContainer>
-                <span className="price">{priceFormatted}</span>
-                <div>
-                  <ButtonsControllers>
-                    <button>
-                      <Minus />
-                    </button>
-                    <span>01</span>
-                    <button>
-                      <Plus />
-                    </button>
-                  </ButtonsControllers>
-                  <button>
-                    <Receipt size={32} />
-                    incluir
+            <PriceContainer>
+              <span className="price">{priceFormatted}</span>
+              <div>
+                <ButtonsControllers>
+                  <button onClick={handleMinusAmountFood}>
+                    <Minus />
                   </button>
-                </div>
-              </PriceContainer>
-            </FoodContent>
-          </FoodContainer>
-        </PreviewContainer>
+                  <span>{String(amountFood).padStart(2, '0')}</span>
+                  <button onClick={handlePlusAmountFood}>
+                    <Plus />
+                  </button>
+                </ButtonsControllers>
+                <button>
+                  <Receipt size={32} />
+                  incluir
+                </button>
+              </div>
+            </PriceContainer>
+          </FoodContent>
+        </FoodContainer>
       )}
-    </main>
+    </PreviewContainer>
   )
 }

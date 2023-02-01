@@ -1,9 +1,12 @@
 import styled from 'styled-components'
 
-export const PreviewContainer = styled.div`
-  padding-top: 1.5rem;
+export const PreviewContainer = styled.main`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 1rem;
 
-  > button {
+  div.back > button {
     background: transparent;
     border: 0;
     color: ${(props) => props.theme['gray-200']};
@@ -15,6 +18,7 @@ export const PreviewContainer = styled.div`
     align-items: center;
     line-height: 0.0001px;
     margin-bottom: 3rem;
+    height: fit-content;
   }
 `
 
@@ -94,6 +98,7 @@ export const PriceContainer = styled.div`
       gap: 4px;
       padding: 0.75rem 0.25rem;
       border-radius: 4px;
+      cursor: pointer;
 
       font-size: 0.875rem;
     }
@@ -105,12 +110,13 @@ export const ButtonsControllers = styled.div`
   display: flex;
   align-items: center;
   gap: 0.875rem;
+
   button {
     background-color: transparent;
     border: 0;
     font-size: 1.5rem;
     line-height: 0.00001px;
-
+    cursor: pointer;
     color: ${(props) => props.theme['white-100']};
   }
 `

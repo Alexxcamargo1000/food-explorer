@@ -5,24 +5,28 @@ export const LoadingContainer = styled.div`
   align-items: center;
   justify-content: center;
   height: calc(100vh - (6.5rem * 2));
-`
 
-const transform = keyframes`
+  > strong {
+    margin-top: 1rem;
+    position: absolute;
+  }
+`
+const rotate = keyframes`
  0% {
-    transform: translateY(0px);
+    transform: rotate(0deg);
   }
 
   50% {
-    transform: translateY(20px);
+    transform: rotate(90deg);
   }
 
   100% {
-    transform: translateY(0px);    
+    transform: rotate(180deg);  
   }
 `
 export const Icon = styled.svg`
-  margin-top: -3rem;
-  width: 3rem;
+  margin-top: -6rem;
+  max-width: 3rem;
   fill: ${(props) => props.theme['blue-200']};
-  animation: ${transform} 2s ease-in-out infinite;
+  animation: ${rotate} 2s ease-in-out infinite;
 `
