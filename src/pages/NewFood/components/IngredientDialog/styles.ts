@@ -141,14 +141,13 @@ export const LinkNewIngredient = styled(Link)`
   border: none;
   cursor: pointer;
   transition: background-color 0.2s, color 0.2s, border-color 0.4s;
-  background-color: ${(props) => props.theme['gray-100']};
+  background-color: ${(props) => props.theme['blue-500']};
   border: 1px solid ${(props) => props.theme['blue-100']};
-  color: ${(props) => props.theme['blue-900']};
+  color: ${(props) => props.theme['white-200']};
 
   &:hover {
-    background-color: ${(props) => props.theme['blue-600']};
+    background-color: ${(props) => props.theme['blue-800']};
     border-color: ${(props) => props.theme['green-400']};
-    color: ${(props) => props.theme['white-200']};
   }
 `
 

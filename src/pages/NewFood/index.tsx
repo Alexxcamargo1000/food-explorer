@@ -106,7 +106,7 @@ export function NewFood() {
             <Form.Fieldset>
               <div>
                 <span>Imagem do prato</span>
-                <Form.InputImage className={!image ? 'empty' : 'notEmpty'}>
+                <Form.InputImage className={!image ? '' : 'notEmpty'}>
                   <label htmlFor="image">
                     <UploadSimple size={32} />
                     <span>Selecione imagem</span>
@@ -120,7 +120,7 @@ export function NewFood() {
                 </Form.InputImage>
               </div>
               <Input
-                className={name.length < 3 ? 'empty' : 'notEmpty'}
+                className={name.length < 3 ? '' : 'notEmpty'}
                 title="Nome"
                 placeholder="Ex.: Salada Ceasar"
                 value={name}
@@ -129,15 +129,15 @@ export function NewFood() {
               <select
                 defaultValue="Selecione um tipo"
                 onChange={(e) => setTypeOfFood(e.target.value)}
-                className={!typeOfFood ? 'empty' : 'notEmpty'}
+                className={!typeOfFood ? '' : 'notEmpty'}
               >
                 <option value="Selecione um tipo" disabled>
                   Selecione um tipo
                 </option>
-                <option defaultValue="Pratos Principais">
+                <option defaultValue="Pratos principais">
                   Pratos Principais
                 </option>
-                <option value="Sobremesa">Sobremesa</option>
+                <option value="Sobremesas">Sobremesas</option>
                 <option value="Bebidas">Bebidas</option>
               </select>
             </Form.Fieldset>
@@ -146,9 +146,7 @@ export function NewFood() {
               <Form.IngredientsRoot>
                 <label htmlFor="">Ingredientes</label>
                 <Form.IngredientsWrapper
-                  className={
-                    ingredientsActive.length === 0 ? 'empty' : 'notEmpty'
-                  }
+                  className={ingredientsActive.length === 0 ? '' : 'notEmpty'}
                 >
                   {ingredientsActive.map((ingredient) => (
                     <Form.Ingredient key={ingredient.id}>
@@ -171,7 +169,7 @@ export function NewFood() {
 
               <Price>
                 <Input
-                  className={!price ? 'empty' : 'notEmpty'}
+                  className={!price ? '' : 'notEmpty'}
                   title="Preço"
                   placeholder="R$ 00,00"
                   value={price}
@@ -184,7 +182,7 @@ export function NewFood() {
               <div className="textarea-wrapper">
                 <label htmlFor="description">Descrição </label>
                 <Form.TextArea
-                  className={!description ? 'empty' : 'notEmpty'}
+                  className={!description ? '' : 'notEmpty'}
                   onChange={(e) => setDescription(e.target.value)}
                   value={description}
                   placeholder="Fale brevemente sobre o prato, seus ingredientes e composição"
