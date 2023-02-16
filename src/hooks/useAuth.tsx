@@ -27,6 +27,7 @@ interface dataProps {
 const AuthContext = createContext({
   signIn: (email: string, password: string) => {},
   user: {} as User | undefined,
+  signOut: () => {},
 })
 
 function AuthProvider({ children }: AuthProviderProps) {
@@ -52,6 +53,12 @@ function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
+  function signOut() {
+    setData({})
+    localStorage.removeItem('@rocketFood:token')
+    localStorage.removeItem('@rocketFood:user')
+  }
+
   useEffect(() => {
     const token = localStorage.getItem('@rocketFood:token')
     const user = localStorage.getItem('@rocketFood:user')
@@ -67,7 +74,7 @@ function AuthProvider({ children }: AuthProviderProps) {
   }, [])
 
   return (
-    <AuthContext.Provider value={{ signIn, user: data.user }}>
+    <AuthContext.Provider value={{ signIn, user: data.user, signOut }}>
       {children}
     </AuthContext.Provider>
   )

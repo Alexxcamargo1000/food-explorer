@@ -1,5 +1,6 @@
 import { SignOut } from 'phosphor-react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../../hooks/useAuth'
 import {
   ButtonHeader,
   ButtonSingOut,
@@ -9,6 +10,13 @@ import {
 } from './styles'
 
 export function HeaderAdmin() {
+  const { signOut } = useAuth()
+  const navigate = useNavigate()
+
+  function handleSignOut() {
+    signOut()
+    navigate('/')
+  }
   return (
     <HeaderContainer>
       <div>
@@ -32,7 +40,7 @@ export function HeaderAdmin() {
           <Link to="/admin/user">Administrador</Link>
           <ButtonHeader to="/admin/new">Adicionar um Prato</ButtonHeader>
 
-          <ButtonSingOut>
+          <ButtonSingOut onClick={handleSignOut}>
             <SignOut size={24} />
           </ButtonSingOut>
         </HeaderButtons>

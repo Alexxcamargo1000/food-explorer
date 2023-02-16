@@ -1,5 +1,5 @@
 import { MagnifyingGlass, Receipt, SignOut } from 'phosphor-react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {
   ButtonHeader,
   ButtonSingOut,
@@ -10,7 +10,13 @@ import {
 import { useAuth } from '../../hooks/useAuth'
 
 export function Header() {
-  const { user } = useAuth()
+  const { user, signOut } = useAuth()
+  const navigate = useNavigate()
+
+  function handleSignOut() {
+    signOut()
+    navigate('/')
+  }
 
   return (
     <HeaderContainer>
@@ -52,7 +58,7 @@ export function Header() {
           Meu pedido (0)
         </ButtonHeader>
 
-        <ButtonSingOut>
+        <ButtonSingOut onClick={handleSignOut}>
           <SignOut size={24} />
         </ButtonSingOut>
       </div>
