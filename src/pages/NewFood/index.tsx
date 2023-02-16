@@ -1,7 +1,7 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import { CaretLeft, Plus, UploadSimple, X } from 'phosphor-react'
-import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { Input } from '../../components/Input'
 import { Loading } from '../../components/Loading'
 import { api } from '../../services/api'
@@ -27,6 +27,11 @@ export function NewFood() {
   const [ingredientsActive, setIngredientsActive] = useState<IngredientProps[]>(
     [],
   )
+  const navigate = useNavigate()
+
+  function backToPage() {
+    navigate(-1)
+  }
 
   function handleCheckedIngredient(ingredientsDialog: IngredientProps[]) {
     setIngredientsActive((prevState) => [...prevState, ...ingredientsDialog])
@@ -92,9 +97,9 @@ export function NewFood() {
   }, [search])
   return (
     <NewFoodContainer>
-      <Link to="/">
+      <button onClick={backToPage} type="button">
         <CaretLeft size={32} /> voltar
-      </Link>
+      </button>
 
       <h1>Adicionar Prato</h1>
 

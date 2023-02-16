@@ -12,7 +12,8 @@ export const NewFoodContainer = styled.main`
     border-color: ${(props) => props.theme['green-400']};
   }
 
-  > a {
+  > button {
+    background: transparent;
     color: currentColor;
     display: flex;
     align-items: center;
@@ -20,6 +21,9 @@ export const NewFoodContainer = styled.main`
     text-decoration: none;
     font-size: 1.5rem;
     margin-bottom: 2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
     width: fit-content;
   }
 `

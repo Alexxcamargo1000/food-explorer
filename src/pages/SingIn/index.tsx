@@ -1,7 +1,17 @@
+import { FormEvent, useState } from 'react'
 import { Input } from '../../components/Input'
+import { useAuth } from '../../hooks/useAuth'
 import { SingInContainer, SingInForm, SingInLogo } from './styles'
 
 export function SingInPage() {
+  const { signIn } = useAuth()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  function handleSignIn(event: FormEvent) {
+    event.preventDefault()
+    signIn(email, password)
+  }
   return (
     <SingInContainer>
       <SingInLogo>
@@ -25,14 +35,18 @@ export function SingInPage() {
           type={'email'}
           title="Email"
           placeholder="Exemplo: exemplo@exemplo.com.br"
+          onChange={(e) => setEmail(e.target.value)}
         />
         <Input
           type={'password'}
           title="Senha"
           placeholder="No mínimo 8 caracteres"
+          onChange={(e) => setPassword(e.target.value)}
         />
 
-        <SingInForm.Button type="submit">Entrar</SingInForm.Button>
+        <SingInForm.Button onClick={handleSignIn} type="submit">
+          Entrar
+        </SingInForm.Button>
         <SingInForm.FormLink to="/register">
           Criar uma conta
         </SingInForm.FormLink>

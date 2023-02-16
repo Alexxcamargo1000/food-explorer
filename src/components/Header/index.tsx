@@ -7,8 +7,11 @@ import {
   InputHeader,
   Logo,
 } from './styles'
+import { useAuth } from '../../hooks/useAuth'
 
 export function Header() {
+  const { user } = useAuth()
+
   return (
     <HeaderContainer>
       <div>
@@ -27,8 +30,11 @@ export function Header() {
           </svg>
           <span>food explorer</span>
         </Logo>
-
-        <Link to="fav">Meus favoritos</Link>
+        {user?.admin ? (
+          <Link to="/admin">Administrador</Link>
+        ) : (
+          <Link to="fav">Meus favoritos</Link>
+        )}
 
         <InputHeader>
           <label htmlFor="search">Busca</label>

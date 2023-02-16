@@ -1,4 +1,4 @@
-import { Receipt, SignOut } from 'phosphor-react'
+import { SignOut } from 'phosphor-react'
 import { Link } from 'react-router-dom'
 import {
   ButtonHeader,
@@ -30,10 +30,7 @@ export function HeaderAdmin() {
 
         <HeaderButtons>
           <Link to="/admin/user">Administrador</Link>
-          <ButtonHeader to="order">
-            <Receipt size={24} />
-            Meu pedido (0)
-          </ButtonHeader>
+          <ButtonHeader to="/admin/new">Adicionar um Prato</ButtonHeader>
 
           <ButtonSingOut>
             <SignOut size={24} />

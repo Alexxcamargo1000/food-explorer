@@ -6,8 +6,10 @@ import { NewFood } from '../pages/NewFood'
 import { NewIngredient } from '../pages/NewIngredient'
 import { Order } from '../pages/Order'
 import { Preview } from '../pages/Preview'
+import { useAuth } from '../hooks/useAuth'
 
 export function AppRouter() {
+  const { user } = useAuth()
   return (
     <Routes>
       <Route path="/" element={<DefaultLayout />}>
@@ -18,8 +20,14 @@ export function AppRouter() {
       </Route>
 
       <Route path="admin" element={<AdminLayout />}>
-        <Route path="new" element={<NewFood />} />
-        <Route path="ingredient/new" element={<NewIngredient />} />
+        {user?.admin && (
+          <>
+            <Route path="" element={<Home />} />
+            <Route path="new" element={<NewFood />} />
+            <Route path="ingredient/new" element={<NewIngredient />} />
+            <Route path="food/:slug" element={<Preview />} />
+          </>
+        )}
       </Route>
     </Routes>
   )
