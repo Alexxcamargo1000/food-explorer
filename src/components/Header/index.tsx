@@ -8,14 +8,24 @@ import {
   Logo,
 } from './styles'
 import { useAuth } from '../../hooks/useAuth'
+import { useFood } from '../../hooks/useFood'
 
-export function Header() {
+interface HeaderProps {
+  handleSearch?: (search: string) => void
+}
+
+export function Header(props: HeaderProps) {
   const { user, signOut } = useAuth()
+  const { getFoods } = useFood()
   const navigate = useNavigate()
 
   function handleSignOut() {
     signOut()
     navigate('/')
+  }
+
+  function handleFoodSearch(search: string) {
+    getFoods(search)
   }
 
   return (
@@ -50,6 +60,7 @@ export function Header() {
             name="search"
             id="search"
             placeholder="Busque pelas opções de pratos"
+            onChange={(e) => handleFoodSearch(e.target.value)}
           />
         </InputHeader>
 

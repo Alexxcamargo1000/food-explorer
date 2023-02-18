@@ -2,6 +2,8 @@ import styled from 'styled-components'
 
 export const SectionHome = styled.section`
   margin-bottom: 2rem;
+
+  min-height: 20rem;
   h3 {
     font-size: 2rem;
     margin-bottom: 2.5rem;
