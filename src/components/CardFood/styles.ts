@@ -11,13 +11,14 @@ export const CardContainer = styled.div`
   padding: 2rem;
   width: 100%;
   max-width: 19rem; //304px
-  background-color: ${(props) => props.theme.blackTransparent};
+  background-color: ${(props) => props.theme['dark-200']};
+  border: 1px solid ${(props) => props.theme['dark-300']};
   flex: none;
 
   button {
     font-weight: bold;
     border: 0;
-    color: ${(props) => props.theme['white-100']};
+    color: ${(props) => props.theme['light-100']};
     cursor: pointer;
     transition: opacity 0.3s;
   }
@@ -43,7 +44,7 @@ export const Description = styled.p`
   text-overflow: ellipsis;
 
   width: 100%;
-  color: ${(props) => props.theme['gray-200']};
+  color: ${(props) => props.theme['light-400']};
   font-size: 0.875rem;
   line-height: 1.6;
   white-space: nowrap;
@@ -51,7 +52,7 @@ export const Description = styled.p`
   text-overflow: ellipsis;
 `
 export const Price = styled.span`
-  color: ${(props) => props.theme['blue-100']};
+  color: ${(props) => props.theme['cake-200']};
   font-size: 2rem;
   line-height: 1.6;
 `
@@ -78,7 +79,7 @@ export const ButtonsContainer = styled.div`
       font-size: 1.25rem;
       background-color: transparent;
       border: 0;
-      color: ${(props) => props.theme['white-100']};
+      color: ${(props) => props.theme['light-300']};
       cursor: pointer;
     }
   }
@@ -86,8 +87,8 @@ export const ButtonsContainer = styled.div`
   button {
     height: 3rem;
     padding: 0.75rem 0.875rem;
-    background: ${(props) => props.theme['red-500']};
-    color: ${(props) => props.theme['white-100']};
+    background: ${(props) => props.theme['tomato-100']};
+    color: ${(props) => props.theme['light-100']};
 
     &:hover {
       opacity: 0.7;

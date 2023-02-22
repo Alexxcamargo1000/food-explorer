@@ -7,7 +7,7 @@ export const ContainerHome = styled.div`
 export const BannerHome = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  background: linear-gradient(${(props) => props.theme.linear});
+  background: linear-gradient(${(props) => props.theme['gradient-200']});
   height: 16.25rem; //260px
   border-radius: 8px;
   margin-bottom: 4rem;
@@ -28,7 +28,7 @@ export const BannerHome = styled.div`
     flex-direction: column;
     padding-left: 2rem;
     margin-top: -2rem;
-    color: ${(props) => props.theme['gray-200']};
+    color: ${(props) => props.theme['light-300']};
 
     h2 {
       font-size: 2.5rem;

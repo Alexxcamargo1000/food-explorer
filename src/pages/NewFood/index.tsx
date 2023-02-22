@@ -125,34 +125,32 @@ export function NewFood() {
                 </Form.InputImage>
               </div>
               <Input
-                className={name.length < 3 ? '' : 'notEmpty'}
                 title="Nome"
                 placeholder="Ex.: Salada Ceasar"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
-              <select
-                defaultValue="Selecione um tipo"
-                onChange={(e) => setTypeOfFood(e.target.value)}
-                className={!typeOfFood ? '' : 'notEmpty'}
-              >
-                <option value="Selecione um tipo" disabled>
-                  Selecione um tipo
-                </option>
-                <option defaultValue="Pratos principais">
-                  Pratos Principais
-                </option>
-                <option value="Sobremesas">Sobremesas</option>
-                <option value="Bebidas">Bebidas</option>
-              </select>
+
+              <Form.SelectWrapper>
+                <label htmlFor="category">Categoria</label>
+                <select
+                  id="category"
+                  defaultValue="Selecione uma categoria"
+                  onChange={(e) => setTypeOfFood(e.target.value)}
+                >
+                  <option defaultValue="Pratos principais">
+                    Pratos Principais
+                  </option>
+                  <option value="Sobremesas">Sobremesas</option>
+                  <option value="Bebidas">Bebidas</option>
+                </select>
+              </Form.SelectWrapper>
             </Form.Fieldset>
 
             <Form.Fieldset>
               <Form.IngredientsRoot>
                 <label htmlFor="">Ingredientes</label>
-                <Form.IngredientsWrapper
-                  className={ingredientsActive.length === 0 ? '' : 'notEmpty'}
-                >
+                <Form.IngredientsWrapper>
                   {ingredientsActive.map((ingredient) => (
                     <Form.Ingredient key={ingredient.id}>
                       <span>{ingredient.name}</span>
@@ -187,7 +185,6 @@ export function NewFood() {
               <div className="textarea-wrapper">
                 <label htmlFor="description">Descrição </label>
                 <Form.TextArea
-                  className={!description ? '' : 'notEmpty'}
                   onChange={(e) => setDescription(e.target.value)}
                   value={description}
                   placeholder="Fale brevemente sobre o prato, seus ingredientes e composição"
@@ -195,7 +192,7 @@ export function NewFood() {
               </div>
             </Form.Fieldset>
 
-            <Form.Button>Adicionar pedido</Form.Button>
+            <Form.Button>Salvar alterações</Form.Button>
           </Form.Root>
           <IngredientDialog
             handleCheckedIngredient={handleCheckedIngredient}

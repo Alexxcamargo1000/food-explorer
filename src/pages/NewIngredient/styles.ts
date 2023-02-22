@@ -24,7 +24,7 @@ export const NewIngredientContainer = styled.main`
 `
 
 export const FormIngredient = styled.form`
-  background-color: ${(props) => props.theme['blue-500']};
+  background-color: ${(props) => props.theme['dark-800']};
   max-width: 400px;
   width: 100%;
   padding: 2rem;
@@ -73,10 +73,10 @@ export const InputImageIngredient = styled.div`
 
 export const ButtonSaveIngredient = styled.button`
   height: 3rem;
-  background-color: ${(props) => props.theme['green-400']};
+  background-color: ${(props) => props.theme['mint-100']};
   border-radius: 4px;
   cursor: pointer;
   border: 0;
-  color: ${(props) => props.theme['blue-900']};
+  color: ${(props) => props.theme['dark-1000']};
   margin-top: 1rem;
 `

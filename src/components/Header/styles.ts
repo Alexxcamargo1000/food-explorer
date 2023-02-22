@@ -8,7 +8,7 @@ export const HeaderContainer = styled.div`
   gap: 2rem;
   justify-content: center;
   align-items: center;
-  background: ${(props) => props.theme['blue-600']};
+  background: ${(props) => props.theme['dark-600']};
 
   > div {
     width: 100%;
@@ -21,7 +21,7 @@ export const HeaderContainer = styled.div`
 
   a {
     text-decoration: none;
-    color: ${(props) => props.theme['gray-100']};
+    color: ${(props) => props.theme['light-100']};
     line-height: 1.6;
   }
 `
@@ -33,7 +33,7 @@ export const Logo = styled(Link)`
   span {
     font-weight: bold;
     font-size: 1.5rem;
-    color: ${(props) => props.theme['white-100']};
+    color: ${(props) => props.theme['light-100']};
   }
 `
 
@@ -46,11 +46,15 @@ export const InputHeader = styled.div`
   padding-block: 0.75rem; //12px
   padding-inline: 0.875rem; //14px
   border-radius: 4px;
-  background-color: ${(props) => props.theme['blue-500']};
+  background-color: ${(props) => props.theme['dark-900']};
 
   &:focus-within {
     outline: none;
-    box-shadow: 0 0 0 2px ${(props) => props.theme['blue-200']};
+    box-shadow: 0 0 0 2px ${(props) => props.theme['cake-200']};
+  }
+
+  > svg {
+    color: ${(props) => props.theme['light-500']};
   }
 
   label {
@@ -69,10 +73,10 @@ export const InputHeader = styled.div`
     background-color: transparent;
     border: none;
     width: 100%;
-    color: ${(props) => props.theme['white-100']};
+    color: ${(props) => props.theme['light-200']};
 
     &::placeholder {
-      color: ${(props) => props.theme['gray-500']};
+      color: ${(props) => props.theme['light-500']};
     }
 
     &:focus {
@@ -82,8 +86,8 @@ export const InputHeader = styled.div`
 `
 
 export const ButtonHeader = styled(Link)`
-  background-color: ${(props) => props.theme['red-500']};
-  color: ${(props) => props.theme['white-100']};
+  background-color: ${(props) => props.theme['tomato-200']};
+  color: ${(props) => props.theme['light-100']};
   border: 0;
   padding-block: 0.75rem;
   padding-inline: 2rem;
@@ -94,20 +98,20 @@ export const ButtonHeader = styled(Link)`
   transition: background 0.2s;
 
   &:hover {
-    background-color: ${(props) => props.theme['red-600']};
+    background-color: ${(props) => props.theme['tomato-300']};
   }
 `
 
 export const ButtonSingOut = styled.button`
   background-color: transparent;
-  color: ${(props) => props.theme['white-100']};
+  color: ${(props) => props.theme['light-100']};
   border: 0;
   cursor: pointer;
   transition: color 0.2s;
   line-height: 0.0001px;
 
   &:hover {
-    color: ${(props) => props.theme['gray-200']};
+    color: ${(props) => props.theme['light-300']};
   }
 `
 

@@ -11,7 +11,7 @@ export const Overlay = styled(DialogOverlay)`
 `
 
 export const Content = styled(DialogContent)`
-  background-color: ${(props) => props.theme['blue-500']};
+  background-color: ${(props) => props.theme['dark-900']};
   border-radius: 8px;
   box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
     hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
@@ -32,15 +32,15 @@ export const SearchContainer = styled.div`
   align-items: center;
   padding-left: 0.5rem;
   border-radius: 4px;
-  border: 1px solid ${(props) => props.theme['white-100']};
+  border: 1px solid ${(props) => props.theme['light-100']};
   margin-bottom: 2rem;
 
   &:focus-within {
-    box-shadow: 0 0 0 2px ${(props) => props.theme['blue-200']};
+    box-shadow: 0 0 0 2px ${(props) => props.theme['cake-200']};
   }
 
   input:focus {
-    box-shadow: 0 0 0 0px ${(props) => props.theme['blue-200']};
+    box-shadow: 0 0 0 0px ${(props) => props.theme['cake-200']};
   }
 
   input {
@@ -73,27 +73,33 @@ export const IngredientButton = styled.button`
   align-items: center;
   justify-content: center;
   transition: background 0.2s, color 0.4s;
-  background-color: ${(props) => props.theme['blue-200']};
-  color: ${(props) => props.theme['blue-400']};
+  background-color: ${(props) => props.theme['cake-200']};
+  color: ${(props) => props.theme['dark-500']};
 
   &:disabled {
     opacity: 0.3;
-    background-color: ${(props) => props.theme['blue-200']};
+    background-color: ${(props) => props.theme['cake-200']};
+
+    &:hover {
+      opacity: 0.3;
+      background-color: ${(props) => props.theme['cake-200']};
+      color: ${(props) => props.theme['dark-500']};
+    }
   }
 
   &:not(:disabled).checked {
-    background-color: ${(props) => props.theme['blue-400']};
-    color: ${(props) => props.theme['white-100']};
+    background-color: ${(props) => props.theme['dark-500']};
+    color: ${(props) => props.theme['light-100']};
 
     &:hover {
-      background-color: ${(props) => props.theme['blue-400']};
-      color: ${(props) => props.theme['white-100']};
+      background-color: ${(props) => props.theme['dark-500']};
+      color: ${(props) => props.theme['light-100']};
     }
   }
 
   &:hover {
-    background-color: ${(props) => props.theme['blue-400']};
-    color: ${(props) => props.theme['blue-200']};
+    background-color: ${(props) => props.theme['dark-500']};
+    color: ${(props) => props.theme['cake-200']};
   }
 
   img {
@@ -125,8 +131,8 @@ const ButtonDefault = styled.button`
 `
 
 export const ButtonAdd = styled(ButtonDefault)`
-  background-color: ${(props) => props.theme['green-400']};
-  color: ${(props) => props.theme['blue-800']};
+  background-color: ${(props) => props.theme['mint-100']};
+  color: ${(props) => props.theme['dark-100']};
 `
 
 export const LinkNewIngredient = styled(Link)`
@@ -141,13 +147,13 @@ export const LinkNewIngredient = styled(Link)`
   border: none;
   cursor: pointer;
   transition: background-color 0.2s, color 0.2s, border-color 0.4s;
-  background-color: ${(props) => props.theme['blue-500']};
-  border: 1px solid ${(props) => props.theme['blue-100']};
-  color: ${(props) => props.theme['white-200']};
+  background-color: ${(props) => props.theme['dark-500']};
+  border: 1px solid ${(props) => props.theme['cake-100']};
+  color: ${(props) => props.theme['light-100']};
 
   &:hover {
-    background-color: ${(props) => props.theme['blue-800']};
-    border-color: ${(props) => props.theme['green-400']};
+    background-color: ${(props) => props.theme['dark-800']};
+    border-color: ${(props) => props.theme['mint-100']};
   }
 `
 
@@ -159,5 +165,5 @@ export const ButtonClose = styled.button`
   right: 15px;
   background-color: transparent;
   border: 0;
-  color: ${(props) => props.theme['white-200']};
+  color: ${(props) => props.theme['light-100']};
 `

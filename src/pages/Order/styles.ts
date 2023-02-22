@@ -16,15 +16,15 @@ export const ContainerOrder = styled.main`
     th,
     td {
       padding: 1rem;
-      border: 2px solid ${(props) => props.theme['blue-400']};
+      border: 2px solid ${(props) => props.theme['light-700']};
     }
   }
 `
 
 const STATUS_COLOR = {
-  pending: 'red-300',
-  complete: 'green-400',
-  preparing: 'orange-100',
+  pending: 'tomato-100',
+  complete: 'mint-100',
+  preparing: 'carrot-100',
 } as const
 
 interface StatusProps {

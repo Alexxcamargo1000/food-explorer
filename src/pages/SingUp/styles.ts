@@ -15,7 +15,7 @@ export const SingUpLogo = styled.div`
 // Form SignIN
 
 const Container = styled.form`
-  background-color: ${(props) => props.theme['blue-600']};
+  background-color: ${(props) => props.theme['dark-700']};
   padding: 4rem;
   border-radius: 1rem;
   max-width: 476px;
@@ -29,20 +29,20 @@ const Title = styled.legend`
   font-size: 2rem;
   font-family: 'Poppins';
   font-weight: 500;
-  color: ${(props) => props.theme['white-100']};
+  color: ${(props) => props.theme['light-100']};
 `
 
 const Button = styled.button`
   padding-block: 0.75rem;
   border: 0;
-  background-color: ${(props) => props.theme['red-500']};
-  color: ${(props) => props.theme['white-100']};
+  background-color: ${(props) => props.theme['tomato-100']};
+  color: ${(props) => props.theme['light-100']};
   cursor: pointer;
   transition: background-color 0.2s;
   border-radius: 4px;
 
   &:hover {
-    background-color: ${(props) => props.theme['red-600']};
+    background-color: ${(props) => props.theme['tomato-200']};
   }
 `
 
@@ -50,11 +50,11 @@ const FormLink = styled(Link)`
   margin: 0 auto;
   font-size: 0.875rem;
   width: fit-content;
-  color: ${(props) => props.theme['white-100']};
+  color: ${(props) => props.theme['light-100']};
   text-decoration: none;
   transition: color 0.2s ease-in-out;
   &:hover {
-    color: ${(props) => props.theme['gray-500']};
+    color: ${(props) => props.theme['light-500']};
   }
 `
 

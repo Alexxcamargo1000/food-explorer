@@ -6,13 +6,17 @@ export const PreviewContainer = styled.main`
   flex-direction: column;
   padding: 1rem;
 
+  div.back {
+    margin-top: 1.5rem;
+  }
+
   div.back > button {
     background: transparent;
     border: 0;
-    color: ${(props) => props.theme['gray-200']};
+    color: ${(props) => props.theme['light-300']};
     font-size: 1.5rem;
     font-family: 'Poppins', sans-serif;
-    font-weight: 500;
+    font-weight: 700;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -81,7 +85,7 @@ export const PriceContainer = styled.div`
   gap: 2rem;
   align-items: center;
   .price {
-    color: ${(props) => props.theme['blue-100']};
+    color: ${(props) => props.theme['cake-200']};
     font-size: 2rem;
   }
 
@@ -91,8 +95,8 @@ export const PriceContainer = styled.div`
     gap: 3rem;
 
     > button {
-      background-color: ${(props) => props.theme['red-500']};
-      color: ${(props) => props.theme['white-100']};
+      background-color: ${(props) => props.theme['tomato-100']};
+      color: ${(props) => props.theme['light-100']};
       display: flex;
       align-items: center;
       gap: 4px;
@@ -117,6 +121,6 @@ export const ButtonsControllers = styled.div`
     font-size: 1.5rem;
     line-height: 0.00001px;
     cursor: pointer;
-    color: ${(props) => props.theme['white-100']};
+    color: ${(props) => props.theme['light-100']};
   }
 `

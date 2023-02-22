@@ -27,6 +27,6 @@ const rotate = keyframes`
 export const Icon = styled.svg`
   margin-top: -6rem;
   max-width: 3rem;
-  fill: ${(props) => props.theme['blue-200']};
+  fill: ${(props) => props.theme['cake-200']};
   animation: ${rotate} 2s ease-in-out infinite;
 `

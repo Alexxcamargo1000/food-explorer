@@ -8,19 +8,19 @@ export const InputContainer = styled.div`
 
   label {
     text-transform: capitalize;
-    color: ${(props) => props.theme['gray-200']};
+    color: ${(props) => props.theme['light-200']};
   }
 
   input {
     padding-inline: 0.875rem;
     padding-block: 0.75rem;
     border-radius: 4px;
-    border: 1px solid ${(props) => props.theme['white-100']};
+    border: 1px solid ${(props) => props.theme['light-100']};
     background-color: transparent;
-    color: ${(props) => props.theme['white-100']};
+    color: ${(props) => props.theme['light-100']};
 
     &::placeholder {
-      color: ${(props) => props.theme['gray-500']};
+      color: ${(props) => props.theme['light-500']};
     }
   }
 `

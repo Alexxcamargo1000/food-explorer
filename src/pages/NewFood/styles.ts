@@ -4,14 +4,6 @@ export const NewFoodContainer = styled.main`
   padding-top: 1.5rem;
   padding-inline: 1rem;
 
-  .empty {
-    //  border-color: ${(props) => props.theme['red-500']};
-  }
-
-  .notEmpty {
-    border-color: ${(props) => props.theme['green-400']};
-  }
-
   > button {
     background: transparent;
     color: currentColor;
@@ -35,6 +27,12 @@ const Root = styled.form`
   gap: 1.5rem;
   margin-top: 2rem;
   padding: 1rem;
+  margin-bottom: 4rem;
+
+  input {
+    background-color: ${(props) => props.theme['dark-800']};
+    border: none;
+  }
 `
 
 const Fieldset = styled.fieldset`
@@ -48,23 +46,6 @@ const Fieldset = styled.fieldset`
     gap: 1rem;
     width: 100%;
   }
-
-  select {
-    background-color: transparent;
-    padding-inline: 0.875rem;
-    padding-block: 0.75rem;
-    height: 45px;
-    align-self: flex-end;
-    color: ${(props) => props.theme['white-200']};
-    border-radius: 4px;
-    border: 1px solid ${(props) => props.theme['white-100']};
-    cursor: pointer;
-
-    option {
-      padding: 1rem;
-      background-color: ${(props) => props.theme['blue-700']};
-    }
-  }
 `
 
 const InputImage = styled.div`
@@ -72,9 +53,8 @@ const InputImage = styled.div`
   padding-inline: 0.875rem;
   padding-block: 0.75rem;
   border-radius: 4px;
-  border: 1px solid ${(props) => props.theme['white-100']};
-  background-color: transparent;
-  color: ${(props) => props.theme['white-100']};
+  background-color: ${(props) => props.theme['dark-800']};
+  color: ${(props) => props.theme['light-100']};
   height: fit-content;
   max-height: 45px;
   display: flex;
@@ -95,6 +75,29 @@ const InputImage = styled.div`
     cursor: pointer;
   }
 `
+
+const SelectWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  select {
+    background-color: ${(props) => props.theme['dark-800']};
+    padding-inline: 0.875rem;
+    padding-block: 0.75rem;
+    height: 100%;
+    align-self: flex-end;
+    color: ${(props) => props.theme['light-200']};
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+
+    option {
+      padding: 1rem;
+      background-color: ${(props) => props.theme['dark-800']};
+    }
+  }
+`
+
 const IngredientsRoot = styled.div`
   width: 100%;
 `
@@ -106,7 +109,9 @@ const IngredientsWrapper = styled.div`
   min-height: 3rem;
   align-items: center;
   justify-content: flex-start;
-  border: 1px solid ${(props) => props.theme['white-100']};
+  background-color: ${(props) => props.theme['dark-800']};
+
+  border: none;
   padding-inline: 0.5rem;
   padding-block: 0.5rem;
   border-radius: 4px;
@@ -117,15 +122,13 @@ const Ingredient = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background-color: rgba(255, 255, 255, 0.1);
-  color: ${(props) => props.theme['white-100']};
+  background-color: ${(props) => props.theme['light-600']};
+
+  color: ${(props) => props.theme['light-100']};
   padding: 0.5rem;
   max-height: 2rem;
   border-radius: 4px;
   transition: opacity 0.2s;
-  span {
-    display: block;
-  }
 
   &:has(button:hover) {
     opacity: 0.8;
@@ -145,7 +148,7 @@ const NewIngredient = styled.div`
   align-items: center;
   max-height: 2rem;
   gap: 0.5rem;
-  border: 1px dashed ${(props) => props.theme['gray-500']};
+  border: 1px dashed ${(props) => props.theme['light-500']};
   line-height: 0;
   background-color: transparent;
   color: currentColor;
@@ -156,13 +159,13 @@ const NewIngredient = styled.div`
   &:hover {
     svg,
     span {
-      color: ${(props) => props.theme['gray-200']};
+      color: ${(props) => props.theme['light-200']};
     }
   }
 
   svg,
   span {
-    color: ${(props) => props.theme['gray-500']};
+    color: ${(props) => props.theme['light-500']};
     transition: color 0.2s;
   }
 `
@@ -171,35 +174,36 @@ const TextArea = styled.textarea`
   padding-inline: 0.875rem;
   padding-block: 0.75rem;
   border-radius: 4px;
-  border: 1px solid ${(props) => props.theme['white-100']};
-  background-color: transparent;
-  color: ${(props) => props.theme['white-100']};
+  border: none;
+  background-color: ${(props) => props.theme['dark-800']};
+  color: ${(props) => props.theme['light-100']};
   min-height: 172px;
+  resize: none;
+  overflow-y: auto;
 
   &::placeholder {
-    color: ${(props) => props.theme['gray-500']};
+    color: ${(props) => props.theme['light-500']};
   }
 `
 
 const Button = styled.button`
-  width: 33%;
-  height: 3rem;
+  padding-inline: 1.5rem;
+  padding-block: 0.75rem;
   align-self: flex-end;
-
   cursor: pointer;
-  background-color: rgba(255, 255, 255, 0.1);
-  color: ${(props) => props.theme['white-100']};
-  border: 1px solid ${(props) => props.theme['white-100']};
-  border-radius: 4px;
+  background-color: ${(props) => props.theme['tomato-100']};
+  color: ${(props) => props.theme['light-100']};
+  border-radius: 5px;
   transition: background-color 0.2s;
 
   &:disabled {
     cursor: not-allowed;
     opacity: 0.1;
+    background-color: ${(props) => props.theme['tomato-400']};
   }
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: ${(props) => props.theme['tomato-200']};
   }
 `
 
@@ -213,6 +217,7 @@ export const NewFoodForm = {
   IngredientsWrapper,
   Ingredient,
   NewIngredient,
+  SelectWrapper,
 }
 
 export const Price = styled.div`
