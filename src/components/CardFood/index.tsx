@@ -1,6 +1,5 @@
 import { Minus, Plus } from 'phosphor-react'
 import { useAuth } from '../../hooks/useAuth'
-import { useFood } from '../../hooks/useFood'
 import { api } from '../../services/api'
 import { formatPriceToReal } from '../../utils/format-price-to-real'
 import { ButtonEdit } from '../ButtonEdit'
