@@ -5,7 +5,7 @@ import styled from 'styled-components'
 export const IngredientDialogContainer = styled(Portal)``
 
 export const Overlay = styled(DialogOverlay)`
-  background-color: ${(props) => props.theme.blackTransparent};
+  background-color: ${(props) => props.theme['gradient-100']};
   position: fixed;
   inset: 0;
 `
@@ -98,8 +98,7 @@ export const IngredientButton = styled.button`
   }
 
   &:hover {
-    background-color: ${(props) => props.theme['dark-500']};
-    color: ${(props) => props.theme['cake-200']};
+    background-color: ${(props) => props.theme['cake-100']};
   }
 
   img {

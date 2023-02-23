@@ -31,7 +31,6 @@ interface ingredientProps {
   image: string
   name: string
 }
-
 interface foodWithIngredients {
   food: foodProps
   ingredients: ingredientProps[]

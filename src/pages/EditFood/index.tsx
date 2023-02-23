@@ -1,12 +1,13 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import { CaretLeft, Plus, UploadSimple, X } from 'phosphor-react'
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { Input } from '../../components/Input'
 import { Loading } from '../../components/Loading'
 import { api } from '../../services/api'
 import { formatPriceToCents } from '../../utils/format-price-to-cents'
-import { IngredientDialog } from './components/IngredientDialog'
+import { formatPriceToReal } from '../../utils/format-price-to-real'
+import { IngredientDialog } from '../NewFood/components/IngredientDialog'
 import { NewFoodContainer, NewFoodForm as Form, Price } from './styles'
 
 export interface IngredientProps {
@@ -15,7 +16,28 @@ export interface IngredientProps {
   name: string
 }
 
-export function NewFood() {
+interface foodProps {
+  created_at: string
+  description: string
+  id: string
+  image: string
+  name: string
+  priceInCents: number
+  slug: string
+  type_of_food_id: string
+  updated_at: string
+  user_id: string
+}
+
+interface foodWithIngredients {
+  food: foodProps
+  ingredients: IngredientProps[]
+  category: string
+}
+
+export function EditFood() {
+  const { slug } = useParams()
+
   const [name, setName] = useState('')
   const [price, setPrice] = useState('')
   const [search, setSearch] = useState('')
@@ -27,6 +49,7 @@ export function NewFood() {
   const [ingredientsActive, setIngredientsActive] = useState<IngredientProps[]>(
     [],
   )
+
   const navigate = useNavigate()
 
   function backToPage() {
@@ -57,7 +80,7 @@ export function NewFood() {
     setImage(file)
   }
 
-  async function handleSubmitFood(e: FormEvent<HTMLFormElement>) {
+  async function handleUpdateFood(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
 
     const priceInCents = formatPriceToCents(price)
@@ -90,24 +113,39 @@ export function NewFood() {
     async function getIngredients() {
       const response = await api.get(`/ingredients?name=${search}`)
       setIngredients(response.data)
-      setIsLoading(true)
+    }
+    getIngredients()
+    setIsLoading(true)
+  }, [search])
+
+  useEffect(() => {
+    async function getFoodByName() {
+      const response = await api.get(`/foods/${slug}`)
+      const { food, category, ingredients }: foodWithIngredients = response.data
+      const priceInReal = formatPriceToReal(food.priceInCents)
+      setName(food.name)
+      setDescription(food.description)
+      setPrice(priceInReal)
+      setIngredientsActive(ingredients)
+      setTypeOfFood(category)
     }
 
-    getIngredients()
-  }, [search])
+    getFoodByName()
+  }, [slug])
+
   return (
     <NewFoodContainer>
       <button onClick={backToPage} type="button">
         <CaretLeft size={32} /> voltar
       </button>
 
-      <h1>Adicionar Prato</h1>
+      <h1>Editar Prato</h1>
 
       {!isLoading ? (
         <Loading />
       ) : (
         <Dialog.Root>
-          <Form.Root onSubmit={(e) => handleSubmitFood(e)}>
+          <Form.Root onSubmit={(e) => handleUpdateFood(e)}>
             <Form.Fieldset>
               <div>
                 <span>Imagem do prato</span>
@@ -126,7 +164,7 @@ export function NewFood() {
               </div>
               <Input
                 title="Nome"
-                placeholder="Ex.: Salada Ceasar"
+                placeholder="Ex.: Salada"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
@@ -135,8 +173,8 @@ export function NewFood() {
                 <label htmlFor="category">Categoria</label>
                 <select
                   id="category"
-                  defaultValue="Selecione uma categoria"
                   onChange={(e) => setTypeOfFood(e.target.value)}
+                  value={typeOfFood}
                 >
                   <option defaultValue="Pratos principais">
                     Pratos Principais

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 export const CardContainer = styled.div`
+  position: relative;
   min-height: 30rem;
   display: flex;
   flex-direction: column;

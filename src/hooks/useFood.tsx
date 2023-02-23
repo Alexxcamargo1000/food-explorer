@@ -32,6 +32,7 @@ interface Ingredient {
 interface foodIngredientProps {
   food: Food
   ingredients: Ingredient
+  category?: string
 }
 
 const FoodContext = createContext({

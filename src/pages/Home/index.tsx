@@ -55,6 +55,7 @@ export function Home() {
                           price={food.priceInCents}
                           title={food.name}
                           slug={food.slug}
+                          id={food.id}
                         />
                       )
                     }

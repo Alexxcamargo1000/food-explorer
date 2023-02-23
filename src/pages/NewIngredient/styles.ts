@@ -47,9 +47,9 @@ export const InputImageIngredient = styled.div`
   padding-inline: 0.875rem;
   padding-block: 0.75rem;
   border-radius: 4px;
-  border: 1px solid ${(props) => props.theme['white-100']};
+  border: 1px solid ${(props) => props.theme['light-100']};
   background-color: transparent;
-  color: ${(props) => props.theme['white-100']};
+  color: ${(props) => props.theme['light-100']};
   height: fit-content;
   max-height: 45px;
   display: flex;
