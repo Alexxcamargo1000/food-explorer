@@ -6,7 +6,7 @@ export function ButtonFavorite() {
   const [value, setValue] = useState(false)
 
   return (
-    <HeartContainer variant={value} onClick={() => setValue(!value)}>
+    <HeartContainer onClick={() => setValue(!value)}>
       {!value ? <Heart size={24} /> : <Heart size={24} weight="fill" />}
     </HeartContainer>
   )
