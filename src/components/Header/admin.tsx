@@ -33,7 +33,10 @@ export function HeaderAdmin() {
               fill="#065E7C"
             />
           </svg>
-          <span>food explorer</span>
+          <div>
+            <span>food explorer</span>
+            <p>admin</p>
+          </div>
         </Logo>
 
         <HeaderButtons>

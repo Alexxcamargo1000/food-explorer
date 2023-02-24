@@ -10,7 +10,7 @@ export function DefaultLayout() {
 
   return (
     <div>
-      {!user?.admin ? <Header /> : <HeaderAdmin />}
+      <Header />
       <Outlet />
       <Footer />
     </div>
