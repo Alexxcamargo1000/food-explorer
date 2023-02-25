@@ -6,7 +6,7 @@ import { Input } from '../../components/Input'
 import { Loading } from '../../components/Loading'
 import { api } from '../../services/api'
 import { formatPriceToCents } from '../../utils/format-price-to-cents'
-import { IngredientDialog } from './components/IngredientDialog'
+import { IngredientDialog } from '../../components/IngredientDialog'
 import { NewFoodContainer, NewFoodForm as Form, Price } from './styles'
 
 export interface IngredientProps {

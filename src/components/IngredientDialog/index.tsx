@@ -1,9 +1,9 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import React, { useState } from 'react'
 import { MagnifyingGlass, X } from 'phosphor-react'
-import { Input } from '../../../../components/Input'
+import { Input } from '../Input'
 
-import { api } from '../../../../services/api'
+import { api } from '../../services/api'
 import {
   ButtonAdd,
   ButtonClose,
@@ -16,7 +16,7 @@ import {
   Overlay,
   SearchContainer,
 } from './styles'
-import { IngredientProps } from '../..'
+import { IngredientProps } from '../../pages/NewFood'
 
 interface IngredientDialogProps {
   handleCheckedIngredient: (ingredient: IngredientProps[]) => void

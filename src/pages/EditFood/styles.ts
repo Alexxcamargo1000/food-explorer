@@ -196,6 +196,10 @@ const Button = styled.button`
   border-radius: 5px;
   transition: background-color 0.2s;
 
+  font-family: 'Poppins', sans-serif;
+  font-size: ${(props) => props.theme.fontsSize.sm};
+  font-weight: 500;
+
   &:disabled {
     cursor: not-allowed;
     opacity: 0.1;
@@ -226,4 +230,24 @@ export const Price = styled.div`
   input {
     min-height: 3.1rem;
   }
+`
+
+export const ButtonsContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  gap: 2rem;
+`
+
+export const ButtonDelete = styled.button`
+  background-color: ${(props) => props.theme['dark-800']};
+  color: ${(props) => props.theme['light-100']};
+  border: 0;
+  border-radius: 5px;
+  padding-inline: 1.5rem;
+  padding-block: 0.75rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: ${(props) => props.theme.fontsSize.sm};
+  font-weight: 500;
+  cursor: pointer;
 `

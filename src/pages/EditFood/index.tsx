@@ -7,8 +7,14 @@ import { Loading } from '../../components/Loading'
 import { api } from '../../services/api'
 import { formatPriceToCents } from '../../utils/format-price-to-cents'
 import { formatPriceToReal } from '../../utils/format-price-to-real'
-import { IngredientDialog } from '../NewFood/components/IngredientDialog'
-import { NewFoodContainer, NewFoodForm as Form, Price } from './styles'
+import { IngredientDialog } from '../../components/IngredientDialog'
+import {
+  ButtonDelete,
+  ButtonsContainer,
+  NewFoodContainer,
+  NewFoodForm as Form,
+  Price,
+} from './styles'
 
 export interface IngredientProps {
   id: string
@@ -90,7 +96,6 @@ export function EditFood() {
       !description ||
       !typeOfFood ||
       ingredientsActive.length === 0 ||
-      !image ||
       !priceInCents
     ) {
       alert('preencha todos os campos')
@@ -230,7 +235,10 @@ export function EditFood() {
               </div>
             </Form.Fieldset>
 
-            <Form.Button>Salvar alterações</Form.Button>
+            <ButtonsContainer>
+              <ButtonDelete type="button">Excluir prato</ButtonDelete>
+              <Form.Button>Salvar alterações</Form.Button>
+            </ButtonsContainer>
           </Form.Root>
           <IngredientDialog
             handleCheckedIngredient={handleCheckedIngredient}
