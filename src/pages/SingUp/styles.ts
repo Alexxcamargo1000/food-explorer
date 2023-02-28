@@ -6,6 +6,13 @@ export const SingUpContainer = styled.div`
   grid-template-columns: 1fr 40rem;
   place-items: center;
   height: 100vh;
+
+  @media (max-width: 800px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 `
 export const SingUpLogo = styled.div`
   display: flex;
@@ -23,6 +30,11 @@ const Container = styled.form`
   display: flex;
   gap: 2rem;
   flex-direction: column;
+
+  @media (max-width: 800px) {
+    background-color: ${(props) => props.theme['dark-400']};
+    max-width: 100%;
+  }
 `
 const Title = styled.legend`
   text-align: center;
@@ -30,6 +42,10 @@ const Title = styled.legend`
   font-family: 'Poppins';
   font-weight: 500;
   color: ${(props) => props.theme['light-100']};
+
+  @media (max-width: 800px) {
+    display: none;
+  }
 `
 
 const Button = styled.button`
@@ -49,6 +65,7 @@ const Button = styled.button`
 const FormLink = styled(Link)`
   margin: 0 auto;
   font-size: 0.875rem;
+  font-family: 'Poppins', sans-serif;
   width: fit-content;
   color: ${(props) => props.theme['light-100']};
   text-decoration: none;

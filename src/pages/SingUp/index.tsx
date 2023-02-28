@@ -47,7 +47,7 @@ export function SingUpPage() {
         <SingUpForm.Title>Crie sua conta</SingUpForm.Title>
         <Input
           type={'text'}
-          title="Nome"
+          title="Seu nome"
           placeholder="Exemplo: Maria da Silva"
           value={name}
           onChange={(e) => setName(e.target.value)}
