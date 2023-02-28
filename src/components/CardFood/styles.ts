@@ -16,6 +16,11 @@ export const CardContainer = styled.div`
   border: 1px solid ${(props) => props.theme['dark-300']};
   flex: none;
 
+  @media (max-width: 800px) {
+    min-height: 25rem;
+    justify-content: center;
+  }
+
   button {
     font-weight: bold;
     border: 0;
@@ -26,6 +31,10 @@ export const CardContainer = styled.div`
 
   img {
     max-width: 11rem; //176px
+
+    @media (max-width: 800px) {
+      max-width: 8rem;
+    }
   }
 `
 
@@ -37,12 +46,20 @@ export const Title = styled(Link)`
   line-height: 1.4;
   overflow: hidden;
   white-space: nowrap;
+
+  @media (max-width: 800px) {
+    font-size: 0.875rem;
+  }
 `
 
 export const Description = styled.p`
   text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  @media (max-width: 800px) {
+    display: none;
+  }
 
   width: 100%;
   color: ${(props) => props.theme['light-400']};
@@ -56,6 +73,10 @@ export const Price = styled.span`
   color: ${(props) => props.theme['cake-200']};
   font-size: 2rem;
   line-height: 1.6;
+
+  @media (max-width: 800px) {
+    font-size: 1rem;
+  }
 `
 export const ButtonsContainer = styled.div`
   z-index: 2;
@@ -66,10 +87,19 @@ export const ButtonsContainer = styled.div`
   gap: 1rem;
   width: 100%;
 
+  @media (max-width: 800px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
   div {
     display: flex;
     gap: 1rem;
     align-items: center;
+
+    @media (max-width: 800px) {
+      margin: 0 auto;
+    }
 
     span {
       font-weight: bold;
@@ -93,6 +123,10 @@ export const ButtonsContainer = styled.div`
 
     &:hover {
       opacity: 0.7;
+    }
+
+    @media (max-width: 800px) {
+      border-radius: 5px;
     }
   }
 `

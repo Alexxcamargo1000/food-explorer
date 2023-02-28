@@ -1,6 +1,6 @@
 import 'keen-slider/keen-slider.min.css'
 import { CaretLeft, CaretRight } from 'phosphor-react'
-import React, { ReactNode, useRef } from 'react'
+import { ReactNode, useRef } from 'react'
 import {
   Carrossel,
   ContainerCarrossel,

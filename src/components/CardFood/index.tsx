@@ -42,18 +42,20 @@ export function CardFood({
       </Title>
       <Description>{description}</Description>
       <Price>{priceFormatted}</Price>
-      <ButtonsContainer>
-        <div>
-          <button>
-            <Minus />
-          </button>
-          <span>01</span>
-          <button>
-            <Plus />
-          </button>
-        </div>
-        <button>incluir</button>
-      </ButtonsContainer>
+      {!user?.admin && (
+        <ButtonsContainer>
+          <div>
+            <button>
+              <Minus />
+            </button>
+            <span>01</span>
+            <button>
+              <Plus />
+            </button>
+          </div>
+          <button>incluir</button>
+        </ButtonsContainer>
+      )}
     </CardContainer>
   )
 }

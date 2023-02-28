@@ -17,7 +17,9 @@ export const GlobalStyle = createGlobalStyle`
     background-color: ${(prop) => prop.theme['dark-400']};
     color: ${(prop) => prop.theme['light-300']};
     -webkit-font-smoothing: antialiased;
+
   }
+
 
   body, input, textarea, button {
     font-family: 'Roboto', sans-serif;
@@ -33,5 +35,9 @@ export const GlobalStyle = createGlobalStyle`
     min-height: calc(100vh - (2 * 6.5rem));
     max-width: 70rem;
     margin: 0 auto;
+
+    @media (max-width: 800px) {
+    padding: 1rem;
+  }
   }
 `

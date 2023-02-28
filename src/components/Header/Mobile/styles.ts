@@ -3,7 +3,7 @@ import * as Portal from '@radix-ui/react-portal'
 
 export const HeaderContainerMobile = styled.div`
   width: 100%;
-  height: 6.5rem;
+  min-height: 6.5rem;
   display: flex;
   gap: 2rem;
   justify-content: center;

@@ -50,10 +50,14 @@ export function HeaderMobile() {
             <img src={logo} alt="" />
           )}
 
-          <ButtonReceipt>
-            <span>0</span>
-            <Receipt size={24} />
-          </ButtonReceipt>
+          {!user?.admin ? (
+            <ButtonReceipt>
+              <span>0</span>
+              <Receipt size={24} />
+            </ButtonReceipt>
+          ) : (
+            <div />
+          )}
         </div>
       ) : (
         <MenuOpen>

@@ -7,6 +7,13 @@ export const SectionHome = styled.section`
   h3 {
     font-size: 2rem;
     margin-bottom: 2.5rem;
+
+    @media (max-width: 800px) {
+      font-weight: 500;
+      font-size: 1.125rem;
+      line-height: 140%;
+      margin-left: 1rem;
+    }
   }
 `
 
@@ -24,6 +31,9 @@ export const ContainerCarrossel = styled.div`
     left: 0px;
     top: 0px;
     pointer-events: none;
+    @media (max-width: 800px) {
+      display: none;
+    }
   }
 
   &::after {
@@ -37,6 +47,9 @@ export const ContainerCarrossel = styled.div`
     top: 0px;
     user-select: none;
     pointer-events: none;
+    @media (max-width: 800px) {
+      display: none;
+    }
   }
 `
 
@@ -55,6 +68,9 @@ export const Carrossel = styled.div`
 `
 
 export const ControlsButtons = styled.div`
+  @media (max-width: 800px) {
+    display: none;
+  }
   button {
     border: 0;
     height: 100%;
