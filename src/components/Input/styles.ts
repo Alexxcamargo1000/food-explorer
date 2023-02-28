@@ -15,8 +15,8 @@ export const InputContainer = styled.div`
     padding-inline: 0.875rem;
     padding-block: 0.75rem;
     border-radius: 4px;
-    border: 1px solid ${(props) => props.theme['light-100']};
-    background-color: transparent;
+    border: 0;
+    background-color: ${(props) => props.theme['dark-900']};
     color: ${(props) => props.theme['light-100']};
 
     &::placeholder {
