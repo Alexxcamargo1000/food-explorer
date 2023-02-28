@@ -1,11 +1,10 @@
-import { SignOut, List, Receipt, MagnifyingGlass, X } from 'phosphor-react'
+import { List, Receipt, MagnifyingGlass, X } from 'phosphor-react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../hooks/useAuth'
 import logoAdmin from '../../../assets/logo-admin.svg'
 import logo from '../../../assets/logo.svg'
 import {
   ButtonMenu,
-  ButtonOutMobile,
   ButtonReceipt,
   ButtonsWrapper,
   HeaderContainerMobile,
