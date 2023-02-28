@@ -1,4 +1,4 @@
-import { CaretLeft, Minus, Plus, Receipt } from 'phosphor-react'
+import { CaretLeft, Minus, Plus } from 'phosphor-react'
 import {
   ButtonsControllers,
   FoodContainer,
@@ -13,7 +13,7 @@ import { api } from '../../services/api'
 import { formatPriceToReal } from '../../utils/format-price-to-real'
 import { Loading } from '../../components/Loading'
 
-interface foodProps {
+interface FoodProps {
   created_at: string
   description: string
   id: string
@@ -32,7 +32,7 @@ interface ingredientProps {
   name: string
 }
 interface foodWithIngredients {
-  food: foodProps
+  food: FoodProps
   ingredients: ingredientProps[]
 }
 
@@ -44,7 +44,7 @@ export function Preview() {
 
   const [foodWithIngredient, setFoodWithIngredient] =
     useState<foodWithIngredients>({
-      food: {} as foodProps,
+      food: {} as FoodProps,
       ingredients: [],
     })
 
@@ -111,7 +111,6 @@ export function Preview() {
             </IngredientsContainer>
 
             <PriceContainer>
-              <span className="price">{priceFormatted}</span>
               <div>
                 <ButtonsControllers>
                   <button onClick={handleMinusAmountFood}>
@@ -122,10 +121,7 @@ export function Preview() {
                     <Plus />
                   </button>
                 </ButtonsControllers>
-                <button>
-                  <Receipt size={32} />
-                  incluir
-                </button>
+                <button>incluir ∙ {priceFormatted}</button>
               </div>
             </PriceContainer>
           </FoodContent>

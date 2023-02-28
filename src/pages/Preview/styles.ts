@@ -6,6 +6,10 @@ export const PreviewContainer = styled.main`
   flex-direction: column;
   padding: 1rem;
 
+  @media (max-width: 800px) {
+    padding-inline: 4rem;
+  }
+
   div.back {
     margin-top: 1.5rem;
   }
@@ -31,10 +35,19 @@ export const FoodContainer = styled.div`
   gap: 2.5rem;
   padding-bottom: 4rem;
 
+  @media (max-width: 800px) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
   img {
     max-width: 24rem;
     max-height: 24rem;
     object-fit: cover;
+    @media (max-width: 800px) {
+      width: 50%;
+    }
   }
 `
 
@@ -97,13 +110,15 @@ export const PriceContainer = styled.div`
     > button {
       background-color: ${(props) => props.theme['tomato-100']};
       color: ${(props) => props.theme['light-100']};
+      border: 0;
       display: flex;
       align-items: center;
       gap: 4px;
-      padding: 0.75rem 0.25rem;
+      padding: 0.75rem 1.5rem;
       border-radius: 4px;
       cursor: pointer;
-
+      font-weight: 500;
+      line-height: 24px;
       font-size: 0.875rem;
     }
   }
