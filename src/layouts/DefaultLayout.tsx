@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom'
 import { Footer } from '../components/Footer'
 import { Header } from '../components/Header'
-import { HeaderAdmin } from '../components/Header/admin'
+import { HeaderMobile } from '../components/Header/Mobile'
 import { useAuth } from '../hooks/useAuth'
 
 export function DefaultLayout() {
@@ -10,7 +10,7 @@ export function DefaultLayout() {
 
   return (
     <div>
-      <Header />
+      <HeaderMobile />
       <Outlet />
       <Footer />
     </div>

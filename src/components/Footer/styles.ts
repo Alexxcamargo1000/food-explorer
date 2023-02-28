@@ -7,6 +7,7 @@ export const FooterContainer = styled.footer`
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 1.4rem;
 
   > div {
     width: 100%;

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.0.2",
+    "@radix-ui/react-portal": "^1.0.1",
     "axios": "^1.2.1",
     "keen-slider": "^6.8.5",
     "phosphor-react": "^1.4.1",

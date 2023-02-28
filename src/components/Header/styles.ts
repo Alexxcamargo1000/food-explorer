@@ -9,6 +9,7 @@ export const HeaderContainer = styled.div`
   justify-content: center;
   align-items: center;
   background: ${(props) => props.theme['dark-600']};
+  padding: 1rem;
 
   > div {
     width: 100%;

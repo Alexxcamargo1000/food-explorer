@@ -77,14 +77,14 @@ export const ControlsButtons = styled.div`
   }
 
   .arrow-left {
-    z-index: 999;
+    z-index: 100;
     position: absolute;
     left: 0px;
     transform: translateY(-50%);
   }
 
   .arrow-right {
-    z-index: 999;
+    z-index: 100;
 
     position: absolute;
     right: 0px;
