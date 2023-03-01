@@ -2,12 +2,13 @@ import styled from 'styled-components'
 
 export const ContainerOrder = styled.main`
   padding-top: 2rem;
-
+  overflow: auto;
   table {
     margin-top: 2rem;
     margin-bottom: 4rem;
     width: 100%;
     border-collapse: collapse;
+    min-width: 800px;
 
     th {
       text-align: left;
