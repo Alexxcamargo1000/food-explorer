@@ -34,6 +34,10 @@ export const FormIngredient = styled.form`
   gap: 1rem;
   margin-bottom: 2rem;
 
+  @media (max-width: 800px) {
+    width: 100%;
+  }
+
   > legend {
     margin-bottom: 1rem;
     font-size: 1.5rem;

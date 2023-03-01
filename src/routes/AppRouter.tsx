@@ -19,6 +19,7 @@ export function AppRouter() {
         <Route path="/order" element={<Order />} />
         <Route path="/edit/:slug" element={<EditFood />} />
         <Route path="/food/:slug" element={<Preview />} />
+        <Route path="ingredient/new" element={<NewIngredient />} />
       </Route>
 
       <Route path="admin" element={<AdminLayout />}>
@@ -27,7 +28,6 @@ export function AppRouter() {
             <Route path="" element={<Home />} />
             <Route path="new" element={<NewFood />} />
             <Route path="edit/:slug" element={<NewFood />} />
-            <Route path="ingredient/new" element={<NewIngredient />} />
           </>
         )}
       </Route>

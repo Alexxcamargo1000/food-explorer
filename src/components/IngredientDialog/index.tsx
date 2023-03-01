@@ -110,7 +110,7 @@ export function IngredientDialog(props: IngredientDialogProps) {
             <ButtonAdd onClick={handleAddIngredient}>Salvar</ButtonAdd>
           </Dialog.Close>
           <Dialog.Close asChild>
-            <LinkNewIngredient to="/admin/ingredient/new">
+            <LinkNewIngredient to="/ingredient/new">
               Novo Ingrediente
             </LinkNewIngredient>
           </Dialog.Close>

@@ -18,7 +18,6 @@ interface CardFoodProps {
   title: string
   description: string
   price: number
-  id: string
 }
 
 export function CardFood({
@@ -27,7 +26,6 @@ export function CardFood({
   price,
   title,
   slug,
-  id,
 }: CardFoodProps) {
   const priceFormatted = formatPriceToReal(price)
   const { user } = useAuth()

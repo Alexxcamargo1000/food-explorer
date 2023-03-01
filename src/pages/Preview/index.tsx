@@ -1,4 +1,4 @@
-import { CaretLeft, Minus, Plus } from 'phosphor-react'
+import { CaretLeft, Minus, Plus, Receipt } from 'phosphor-react'
 import {
   ButtonsControllers,
   FoodContainer,
@@ -7,11 +7,12 @@ import {
   PreviewContainer,
   PriceContainer,
 } from './styles'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { api } from '../../services/api'
 import { formatPriceToReal } from '../../utils/format-price-to-real'
 import { Loading } from '../../components/Loading'
+import { useAuth } from '../../hooks/useAuth'
 
 interface FoodProps {
   created_at: string
@@ -41,6 +42,8 @@ export function Preview() {
   const { slug } = useParams()
   const [isLoading, isSetLoading] = useState(false)
   const [amountFood, setAmountFood] = useState(1)
+  const { user } = useAuth()
+  console.log(user)
 
   const [foodWithIngredient, setFoodWithIngredient] =
     useState<foodWithIngredients>({
@@ -101,10 +104,6 @@ export function Preview() {
             <IngredientsContainer>
               {ingredients.map((ingredient) => (
                 <li key={ingredient.id}>
-                  <img
-                    src={`${api.defaults.baseURL}/ingredients/files/${ingredient.image}`}
-                    alt=""
-                  />
                   <span>{ingredient.name}</span>
                 </li>
               ))}
@@ -112,16 +111,25 @@ export function Preview() {
 
             <PriceContainer>
               <div>
-                <ButtonsControllers>
-                  <button onClick={handleMinusAmountFood}>
-                    <Minus />
+                {user?.admin ?? (
+                  <ButtonsControllers>
+                    <button onClick={handleMinusAmountFood}>
+                      <Minus />
+                    </button>
+                    <span>{String(amountFood).padStart(2, '0')}</span>
+                    <button onClick={handlePlusAmountFood}>
+                      <Plus />
+                    </button>
+                  </ButtonsControllers>
+                )}
+
+                {user?.admin ? (
+                  <Link to={`/edit/${food.slug}`}>Editar prato</Link>
+                ) : (
+                  <button>
+                    <Receipt size={24} /> <span>pedir ∙ {priceFormatted}</span>
                   </button>
-                  <span>{String(amountFood).padStart(2, '0')}</span>
-                  <button onClick={handlePlusAmountFood}>
-                    <Plus />
-                  </button>
-                </ButtonsControllers>
-                <button>incluir ∙ {priceFormatted}</button>
+                )}
               </div>
             </PriceContainer>
           </FoodContent>
