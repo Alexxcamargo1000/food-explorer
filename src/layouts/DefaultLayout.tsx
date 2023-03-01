@@ -6,11 +6,12 @@ import { useAuth } from '../hooks/useAuth'
 
 export function DefaultLayout() {
   const { user } = useAuth()
-  console.log(user?.admin)
+
+  const widthScreen = window.screen.width
 
   return (
     <div>
-      <HeaderMobile />
+      <Header />
       <Outlet />
       <Footer />
     </div>

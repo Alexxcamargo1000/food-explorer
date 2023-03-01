@@ -18,83 +18,12 @@ import { useState } from 'react'
 import { Footer } from '../../Footer'
 import { useFood } from '../../../hooks/useFood'
 
-export function HeaderMobile() {
-  const { signOut, user } = useAuth()
-  const { getFoods } = useFood()
-  const navigate = useNavigate()
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+interface MenuMobileProps {
+  isOpen: boolean
+}
 
-  function handleMenuToggle() {
-    setIsMenuOpen((state) => !state)
-  }
-
-  function handleSignOut() {
-    signOut()
-    navigate('/')
-  }
-
-  function handleFoodSearch(search: string) {
-    getFoods(search)
-  }
+export function MenuMobile(props: MenuMobileProps) {
   return (
-    <HeaderContainerMobile>
-      {!isMenuOpen ? (
-        <div>
-          <ButtonMenu onClick={handleMenuToggle}>
-            <List size={24} />
-          </ButtonMenu>
 
-          {user?.admin ? (
-            <img src={logoAdmin} alt="" />
-          ) : (
-            <img src={logo} alt="" />
-          )}
-
-          {!user?.admin ? (
-            <ButtonReceipt>
-              <span>0</span>
-              <Receipt size={24} />
-            </ButtonReceipt>
-          ) : (
-            <div />
-          )}
-        </div>
-      ) : (
-        <MenuOpen>
-          <MenuHeader>
-            <button onClick={handleMenuToggle}>
-              <X size={24} /> <span>Menu</span>
-            </button>
-          </MenuHeader>
-
-          <MenuContainer>
-            <InputHeaderMobile>
-              <label htmlFor="search">Busca</label>
-              <MagnifyingGlass size={24} />
-              <input
-                type="text"
-                name="search"
-                id="search"
-                placeholder="Busque pelas opções de pratos"
-                onChange={(e) => handleFoodSearch(e.target.value)}
-              />
-            </InputHeaderMobile>
-
-            <ButtonsWrapper>
-              {user?.admin && (
-                <Link to="/new" onClick={handleMenuToggle}>
-                  Novo Prato
-                </Link>
-              )}
-              <button onClick={handleSignOut}>Sair</button>
-            </ButtonsWrapper>
-          </MenuContainer>
-
-          <MenuFooter>
-            <Footer />
-          </MenuFooter>
-        </MenuOpen>
-      )}
-    </HeaderContainerMobile>
   )
 }

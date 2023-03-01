@@ -22,7 +22,7 @@ export const ContainerCarrossel = styled.div`
 
   &::before {
     content: '';
-    z-index: 0;
+    z-index: 1;
     position: absolute;
     height: 100%;
     width: 278px;
@@ -38,7 +38,7 @@ export const ContainerCarrossel = styled.div`
 
   &::after {
     content: '';
-    z-index: 0;
+    z-index: 1;
     position: absolute;
     height: 100%;
     width: 278px;
