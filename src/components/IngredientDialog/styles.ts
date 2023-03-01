@@ -24,6 +24,12 @@ export const Content = styled(DialogContent)`
   max-height: 85vh;
   padding: 3rem;
   overflow-y: auto;
+
+  @media (max-width: 500px) {
+    padding: 1rem;
+    padding-top: 3rem;
+    width: 98vw;
+  }
 `
 
 export const SearchContainer = styled.div`
@@ -56,6 +62,9 @@ export const ListIngredient = styled.ul`
   margin-bottom: 1.5rem;
   margin-top: 1rem;
 
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr 1fr;
+  }
   li {
     display: flex;
   }

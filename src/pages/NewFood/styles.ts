@@ -17,6 +17,7 @@ export const NewFoodContainer = styled.main`
     display: flex;
     align-items: center;
     width: fit-content;
+    border: 0;
   }
 `
 
@@ -39,6 +40,10 @@ const Fieldset = styled.fieldset`
   display: flex;
   gap: 2rem;
   border: none;
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+  }
 
   .textarea-wrapper {
     display: flex;
@@ -90,6 +95,10 @@ const SelectWrapper = styled.div`
     border-radius: 4px;
     border: none;
     cursor: pointer;
+
+    @media (max-width: 800px) {
+      width: 100%;
+    }
 
     option {
       padding: 1rem;
@@ -187,6 +196,7 @@ const TextArea = styled.textarea`
 `
 
 const Button = styled.button`
+  border: 0;
   padding-inline: 1.5rem;
   padding-block: 0.75rem;
   align-self: flex-end;

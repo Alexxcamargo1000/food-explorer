@@ -6,6 +6,7 @@ export const NewFoodContainer = styled.main`
 
   > button {
     background: transparent;
+    border: 0;
     color: currentColor;
     display: flex;
     align-items: center;
@@ -17,6 +18,14 @@ export const NewFoodContainer = styled.main`
     display: flex;
     align-items: center;
     width: fit-content;
+  }
+
+  h1 {
+    @media (max-width: 800px) {
+      font-size: 2rem;
+      line-height: 140%;
+      margin-left: 1rem;
+    }
   }
 `
 
@@ -39,6 +48,10 @@ const Fieldset = styled.fieldset`
   display: flex;
   gap: 2rem;
   border: none;
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+  }
 
   .textarea-wrapper {
     display: flex;
@@ -91,9 +104,17 @@ const SelectWrapper = styled.div`
     border: none;
     cursor: pointer;
 
+    @media (max-width: 800px) {
+      width: 100%;
+    }
+
     option {
       padding: 1rem;
       background-color: ${(props) => props.theme['dark-800']};
+
+      @media (max-width: 800px) {
+        width: 50%;
+      }
     }
   }
 `
@@ -191,6 +212,7 @@ const Button = styled.button`
   padding-block: 0.75rem;
   align-self: flex-end;
   cursor: pointer;
+  border: 0;
   background-color: ${(props) => props.theme['tomato-100']};
   color: ${(props) => props.theme['light-100']};
   border-radius: 5px;
@@ -237,6 +259,10 @@ export const ButtonsContainer = styled.div`
   display: flex;
   justify-content: end;
   gap: 2rem;
+
+  @media (max-width: 800px) {
+    justify-content: space-between;
+  }
 `
 
 export const ButtonDelete = styled.button`
