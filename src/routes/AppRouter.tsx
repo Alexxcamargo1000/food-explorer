@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
-import { AdminLayout } from '../layouts/AdminLayout'
+
 import { DefaultLayout } from '../layouts/DefaultLayout'
 import { Home } from '../pages/Home'
 import { NewFood } from '../pages/NewFood'
@@ -8,6 +8,7 @@ import { Order } from '../pages/Order'
 import { Preview } from '../pages/Preview'
 import { useAuth } from '../hooks/useAuth'
 import { EditFood } from '../pages/EditFood'
+import { Page404 } from '../pages/404'
 
 export function AppRouter() {
   const { user } = useAuth()
@@ -15,21 +16,18 @@ export function AppRouter() {
     <Routes>
       <Route path="/" element={<DefaultLayout />}>
         <Route index element={<Home />} />
-        <Route path="/new" element={<NewFood />} />
         <Route path="/order" element={<Order />} />
-        <Route path="/edit/:slug" element={<EditFood />} />
         <Route path="/food/:slug" element={<Preview />} />
-        <Route path="ingredient/new" element={<NewIngredient />} />
-      </Route>
 
-      <Route path="admin" element={<AdminLayout />}>
-        {user?.admin && (
+        {user?.admin ?? (
           <>
-            <Route path="" element={<Home />} />
-            <Route path="new" element={<NewFood />} />
-            <Route path="edit/:slug" element={<NewFood />} />
+            <Route path="/edit/:slug" element={<EditFood />} />
+            <Route path="/new" element={<NewFood />} />
+            <Route path="ingredient/new" element={<NewIngredient />} />
           </>
         )}
+
+        <Route path="*" element={<Page404 />} />
       </Route>
     </Routes>
   )
