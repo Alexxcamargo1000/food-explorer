@@ -76,7 +76,7 @@ export function Header(props: HeaderProps) {
             Meu pedido (0)
           </ButtonHeader>
         ) : (
-          <ButtonHeader to="/admin/new">Novo prato</ButtonHeader>
+          <ButtonHeader to="/new">Novo prato</ButtonHeader>
         )}
 
         <ButtonSingOut onClick={handleSignOut}>

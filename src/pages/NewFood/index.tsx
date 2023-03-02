@@ -8,6 +8,7 @@ import { api } from '../../services/api'
 import { formatPriceToCents } from '../../utils/format-price-to-cents'
 import { IngredientDialog } from '../../components/IngredientDialog'
 import { NewFoodContainer, NewFoodForm as Form, Price } from './styles'
+import { useAuth } from '../../hooks/useAuth'
 
 export interface IngredientProps {
   id: string
@@ -16,6 +17,8 @@ export interface IngredientProps {
 }
 
 export function NewFood() {
+  const { user } = useAuth()
+
   const [name, setName] = useState('')
   const [price, setPrice] = useState('')
   const [search, setSearch] = useState('')
@@ -87,6 +90,9 @@ export function NewFood() {
   }
 
   useEffect(() => {
+    if (!user?.admin) {
+      navigate('/')
+    }
     async function getIngredients() {
       const response = await api.get(`/ingredients?name=${search}`)
       setIngredients(response.data)
@@ -94,6 +100,7 @@ export function NewFood() {
     }
 
     getIngredients()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search])
   return (
     <NewFoodContainer>

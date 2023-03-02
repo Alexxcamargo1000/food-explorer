@@ -15,6 +15,7 @@ import {
   NewFoodForm as Form,
   Price,
 } from './styles'
+import { useAuth } from '../../hooks/useAuth'
 
 export interface IngredientProps {
   id: string
@@ -43,6 +44,7 @@ interface foodWithIngredients {
 
 export function EditFood() {
   const { slug } = useParams()
+  const { user } = useAuth()
 
   const [name, setName] = useState('')
   const [price, setPrice] = useState('')
@@ -124,6 +126,9 @@ export function EditFood() {
   }, [search])
 
   useEffect(() => {
+    if (!user?.admin) {
+      navigate('/')
+    }
     async function getFoodByName() {
       const response = await api.get(`/foods/${slug}`)
       const { food, category, ingredients }: foodWithIngredients = response.data
@@ -136,6 +141,7 @@ export function EditFood() {
     }
 
     getFoodByName()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slug])
 
   return (

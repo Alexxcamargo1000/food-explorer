@@ -1,6 +1,8 @@
 import { CaretLeft, UploadSimple } from 'phosphor-react'
-import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { Input } from '../../components/Input'
+import { useAuth } from '../../hooks/useAuth'
 import {
   ButtonSaveIngredient,
   FormIngredient,
@@ -9,6 +11,16 @@ import {
 } from './styles'
 
 export function NewIngredient() {
+  const { user } = useAuth()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!user?.admin) {
+      navigate('/')
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
     <NewIngredientContainer>
       <Link to="/new">
