@@ -1,8 +1,10 @@
-import { CaretLeft, UploadSimple } from 'phosphor-react'
-import { useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { UploadSimple } from 'phosphor-react'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { ButtonBack } from '../../components/ButtonBack'
 import { Input } from '../../components/Input'
 import { useAuth } from '../../hooks/useAuth'
+import { api } from '../../services/api'
 import {
   ButtonSaveIngredient,
   FormIngredient,
@@ -13,6 +15,40 @@ import {
 export function NewIngredient() {
   const { user } = useAuth()
   const navigate = useNavigate()
+  const [ingredientName, setIngredientName] = useState('')
+  const [image, setImage] = useState<File>()
+
+  function handleAddImage(event: ChangeEvent<HTMLInputElement>) {
+    if (event.target.files!.length < 1) {
+      return
+    }
+    const file = event.target.files![0]
+    setImage(file)
+  }
+
+  async function handleSubmitNewIngredient(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    if (!ingredientName) {
+      return
+    }
+    try {
+      await api.post(
+        'ingredients',
+        {
+          name: ingredientName,
+          image,
+        },
+        { headers: { 'Content-Type': 'multipart/form-data' } },
+      )
+      alert('ingrediente criado')
+    } catch (error: any) {
+      if (error.response) {
+        alert(error.response.data.message)
+      } else {
+        alert('não foi possível criar um novo ingrediente')
+      }
+    }
+  }
 
   useEffect(() => {
     if (!user?.admin) {
@@ -23,13 +59,17 @@ export function NewIngredient() {
 
   return (
     <NewIngredientContainer>
-      <Link to="/new">
-        <CaretLeft size={32} /> voltar
-      </Link>
-      <FormIngredient>
+      <ButtonBack />
+      <FormIngredient onSubmit={handleSubmitNewIngredient}>
         <legend>Adicionar Ingrediente</legend>
         <div>
-          <Input title="Nome" placeholder="Ex. Tomate" />
+          <Input
+            title="Nome"
+            placeholder="Ex. Tomate"
+            value={ingredientName}
+            required
+            onChange={(e) => setIngredientName(e.target.value)}
+          />
         </div>
         <div>
           <span>Imagem do prato</span>
@@ -38,7 +78,12 @@ export function NewIngredient() {
               <UploadSimple size={32} />
               <span>Selecione a imagem</span>
             </label>
-            <input type="file" id="image" name="image" />
+            <input
+              type="file"
+              id="image"
+              name="image"
+              onChange={(e) => handleAddImage(e)}
+            />
           </InputImageIngredient>
         </div>
 

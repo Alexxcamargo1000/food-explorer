@@ -1,32 +1,13 @@
 import styled from 'styled-components'
 
 export const PreviewContainer = styled.main`
+  padding: 1rem;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  padding: 1rem;
 
   @media (max-width: 800px) {
     padding-inline: 4rem;
-  }
-
-  div.back {
-    margin-top: 1.5rem;
-  }
-
-  div.back > button {
-    background: transparent;
-    border: 0;
-    color: ${(props) => props.theme['light-300']};
-    font-size: 1.5rem;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    line-height: 0.0001px;
-    margin-bottom: 3rem;
-    height: fit-content;
   }
 `
 
@@ -36,8 +17,8 @@ export const FoodContainer = styled.div`
   padding-bottom: 4rem;
 
   @media (max-width: 800px) {
-    flex-direction: column;
     align-items: center;
+    flex-direction: column;
     justify-content: center;
   }
 
@@ -61,7 +42,7 @@ export const FoodContent = styled.div`
   h1 {
     font-size: 2.5rem;
     font-weight: 500;
-    margin-bottom: 8px;
+    margin-bottom: 0.5rem;
   }
 
   p {
@@ -96,7 +77,7 @@ export const IngredientsContainer = styled.ul`
     span {
       text-align: center;
       display: block;
-      padding-inline: 8px;
+      padding-inline: 0.5rem;
       padding-block: 4px;
       border-radius: 5px;
       background-color: ${(props) => props.theme['dark-1000']};

@@ -6,16 +6,8 @@ export const NewIngredientContainer = styled.main`
   align-items: center;
   padding: 2rem;
 
-  > a {
+  > button {
     align-self: flex-start;
-    color: currentColor;
-    display: flex;
-    align-items: center;
-    gap: 0.5;
-    text-decoration: none;
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-    width: fit-content;
   }
 
   h2 {

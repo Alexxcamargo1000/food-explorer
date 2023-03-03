@@ -1,4 +1,4 @@
-import { CaretLeft, Minus, Plus, Receipt } from 'phosphor-react'
+import { Minus, Plus, Receipt } from 'phosphor-react'
 import {
   ButtonsControllers,
   FoodContainer,
@@ -7,12 +7,13 @@ import {
   PreviewContainer,
   PriceContainer,
 } from './styles'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { api } from '../../services/api'
 import { formatPriceToReal } from '../../utils/format-price-to-real'
 import { Loading } from '../../components/Loading'
 import { useAuth } from '../../hooks/useAuth'
+import { ButtonBack } from '../../components/ButtonBack'
 
 interface FoodProps {
   created_at: string
@@ -38,7 +39,6 @@ interface foodWithIngredients {
 }
 
 export function Preview() {
-  const navigate = useNavigate()
   const { slug } = useParams()
   const [isLoading, isSetLoading] = useState(false)
   const [amountFood, setAmountFood] = useState(1)
@@ -53,10 +53,6 @@ export function Preview() {
   const { food, ingredients } = foodWithIngredient
 
   const priceFormatted = formatPriceToReal(food.priceInCents * amountFood)
-
-  function handleBackNavigate() {
-    navigate(-1)
-  }
 
   function handlePlusAmountFood() {
     setAmountFood((numb) => numb + 1)
@@ -80,12 +76,7 @@ export function Preview() {
   }, [slug])
   return (
     <PreviewContainer>
-      <div className="back">
-        <button onClick={handleBackNavigate}>
-          <CaretLeft size={32} />
-          Voltar
-        </button>
-      </div>
+      <ButtonBack />
 
       {!isLoading ? (
         <Loading />
@@ -110,7 +101,7 @@ export function Preview() {
 
             <PriceContainer>
               <div>
-                {user?.admin ?? (
+                {!user?.admin ? (
                   <ButtonsControllers>
                     <button onClick={handleMinusAmountFood}>
                       <Minus />
@@ -120,6 +111,8 @@ export function Preview() {
                       <Plus />
                     </button>
                   </ButtonsControllers>
+                ) : (
+                  <></>
                 )}
 
                 {user?.admin ? (
