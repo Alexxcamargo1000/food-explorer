@@ -1,6 +1,6 @@
-import { Routes, Route } from 'react-router-dom'
 import { SingInPage } from '../pages/SingIn'
 import { SingUpPage } from '../pages/SingUp'
+import { Routes, Route } from 'react-router-dom'
 
 export function AuthRouter() {
   return (

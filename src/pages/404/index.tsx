@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom'
+
 import { Container404, Content404 } from './styles'
 
 export function Page404() {

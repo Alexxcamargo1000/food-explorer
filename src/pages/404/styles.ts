@@ -2,12 +2,12 @@ import styled from 'styled-components'
 
 export const Container404 = styled.main`
   > button {
-    background-color: transparent;
     border: 0;
-    color: ${(props) => props.theme['light-100']};
-    cursor: pointer;
     margin: 2rem;
+    cursor: pointer;
     transition: color 0.2s;
+    background-color: transparent;
+    color: ${(props) => props.theme['light-100']};
     &:hover {
       color: ${(props) => props.theme['light-500']};
     }

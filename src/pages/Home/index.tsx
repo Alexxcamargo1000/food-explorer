@@ -1,11 +1,12 @@
 import bannerHomeImg from '../../assets/bannerHome.png'
+
 import { BannerHome, ContainerHome } from './styles'
 
-import { CardFood } from '../../components/CardFood'
-import { SectionFood } from '../../components/SectionFood'
 import { Fragment, useEffect, useState } from 'react'
-import { api } from '../../services/api'
+import { SectionFood } from '../../components/SectionFood'
+import { CardFood } from '../../components/CardFood'
 import { useFood } from '../../hooks/useFood'
+import { api } from '../../services/api'
 
 interface TypeOfFood {
   id: string
@@ -13,7 +14,6 @@ interface TypeOfFood {
 }
 
 export function Home() {
-  // const [foods, setFoods] = useState<foodIngredientProps[]>([])
   const [typeFood, setTypeFood] = useState<TypeOfFood[]>([])
 
   const { foods, getFoods } = useFood()
@@ -25,8 +25,6 @@ export function Home() {
   useEffect(() => {
     getTypeFood()
     getFoods()
-    console.log('12')
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
