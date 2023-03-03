@@ -93,27 +93,51 @@ export function EditFood() {
 
     const priceInCents = formatPriceToCents(price)
 
-    if (
-      !name ||
-      !description ||
-      !typeOfFood ||
-      ingredientsActive.length === 0 ||
-      !priceInCents
-    ) {
-      alert('preencha todos os campos')
-      return
-    }
+    const ingredientsNames = ingredientsActive.map((ingre) => ingre.name)
+    const ingredientsNamesString = ingredientsNames.toString()
 
-    const newFood = {
-      name,
-      description,
-      priceInCents,
-      typeOfFood,
-      image,
-      ingredientsActive,
+    try {
+      await api.put(
+        `foods/${slug}`,
+        {
+          name,
+          description,
+          priceInCents,
+          typeFood: typeOfFood,
+          imageUpdated: image,
+          ingredients: ingredientsNamesString,
+        },
+        { headers: { 'Content-Type': 'multipart/form-data' } },
+      )
+      alert('prato atualizado')
+      navigate('/')
+    } catch (error: any) {
+      if (error.response) {
+        alert(error.response.data.message)
+      } else {
+        alert('não foi possível atualizar o prato')
+      }
     }
+  }
 
-    console.log(newFood)
+  async function handleDeleteFood() {
+    try {
+      const confirm = window.confirm(`deseja deletar esse prato`)
+
+      if (!confirm) {
+        return
+      }
+
+      await api.delete(`foods/${slug}`)
+      alert('prato deletado com sucesso')
+      navigate('/')
+    } catch (error: any) {
+      if (error.response) {
+        alert(error.response.data.message)
+      } else {
+        alert('não foi possível deletar o prato')
+      }
+    }
   }
 
   useEffect(() => {
@@ -242,7 +266,9 @@ export function EditFood() {
             </Form.Fieldset>
 
             <ButtonsContainer>
-              <ButtonDelete type="button">Excluir prato</ButtonDelete>
+              <ButtonDelete onClick={handleDeleteFood} type="button">
+                Excluir prato
+              </ButtonDelete>
               <Form.Button>Salvar alterações</Form.Button>
             </ButtonsContainer>
           </Form.Root>

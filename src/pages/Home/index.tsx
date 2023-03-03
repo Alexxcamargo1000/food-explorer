@@ -16,7 +16,7 @@ export function Home() {
   // const [foods, setFoods] = useState<foodIngredientProps[]>([])
   const [typeFood, setTypeFood] = useState<TypeOfFood[]>([])
 
-  const { foods } = useFood()
+  const { foods, getFoods } = useFood()
 
   async function getTypeFood() {
     const response = await api.get('/type-food')
@@ -24,6 +24,10 @@ export function Home() {
   }
   useEffect(() => {
     getTypeFood()
+    getFoods()
+    console.log('12')
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

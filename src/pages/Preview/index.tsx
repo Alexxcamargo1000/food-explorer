@@ -43,7 +43,6 @@ export function Preview() {
   const [isLoading, isSetLoading] = useState(false)
   const [amountFood, setAmountFood] = useState(1)
   const { user } = useAuth()
-  console.log(user)
 
   const [foodWithIngredient, setFoodWithIngredient] =
     useState<foodWithIngredients>({

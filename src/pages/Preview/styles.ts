@@ -44,6 +44,8 @@ export const FoodContainer = styled.div`
   img {
     max-width: 24rem;
     max-height: 24rem;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     @media (max-width: 800px) {
       width: 80%;
