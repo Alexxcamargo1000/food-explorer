@@ -1,6 +1,6 @@
 import bannerHomeImg from '../../assets/bannerHome.png'
 import { BannerHome, ContainerHome } from './styles'
-// import foodImg from '../../assets/food.png'
+
 import { CardFood } from '../../components/CardFood'
 import { SectionFood } from '../../components/SectionFood'
 import { Fragment, useEffect, useState } from 'react'
@@ -55,7 +55,6 @@ export function Home() {
                           price={food.priceInCents}
                           title={food.name}
                           slug={food.slug}
-                          id={food.id}
                         />
                       )
                     }

@@ -100,6 +100,11 @@ const SelectWrapper = styled.div`
       width: 100%;
     }
 
+    option.first {
+      color: ${(props) => props.theme['dark-1000']};
+      pointer-events: none;
+    }
+
     option {
       padding: 1rem;
       background-color: ${(props) => props.theme['dark-800']};

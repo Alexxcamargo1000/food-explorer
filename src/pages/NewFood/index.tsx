@@ -22,7 +22,7 @@ export function NewFood() {
   const [name, setName] = useState('')
   const [price, setPrice] = useState('')
   const [search, setSearch] = useState('')
-  const [typeOfFood, setTypeOfFood] = useState('')
+  const [typeOfFood, setTypeOfFood] = useState('Pratos principais')
   const [image, setImage] = useState<File>()
   const [isLoading, setIsLoading] = useState(false)
   const [description, setDescription] = useState('')
@@ -57,6 +57,7 @@ export function NewFood() {
       return
     }
     const file = event.target.files![0]
+
     setImage(file)
   }
 
@@ -65,28 +66,38 @@ export function NewFood() {
 
     const priceInCents = formatPriceToCents(price)
 
-    if (
-      !name ||
-      !description ||
-      !typeOfFood ||
-      ingredientsActive.length === 0 ||
-      !image ||
-      !priceInCents
-    ) {
-      alert('preencha todos os campos')
+    if (ingredientsActive.length === 0) {
+      return alert('adicione pelo menos um ingrediente')
+    }
+    if (!name || !description || !priceInCents) {
       return
     }
 
-    const newFood = {
-      name,
-      description,
-      priceInCents,
-      typeOfFood,
-      image,
-      ingredientsActive,
-    }
+    const ingredientsNames = ingredientsActive.map((ingre) => ingre.name)
+    const ingredientsNamesString = ingredientsNames.toString()
 
-    console.log(newFood)
+    try {
+      await api.post(
+        'foods',
+        {
+          name,
+          description,
+          priceInCents,
+          typeFood: typeOfFood,
+          image,
+          ingredients: ingredientsNamesString,
+        },
+        { headers: { 'Content-Type': 'multipart/form-data' } },
+      )
+      alert('novo prato criado')
+      navigate('/')
+    } catch (error: any) {
+      if (error.response) {
+        alert(error.response.data.message)
+      } else {
+        alert('não foi possível criar um novo prato')
+      }
+    }
   }
 
   useEffect(() => {
@@ -136,18 +147,17 @@ export function NewFood() {
                 placeholder="Ex.: Salada Ceasar"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                required
               />
 
               <Form.SelectWrapper>
                 <label htmlFor="category">Categoria</label>
                 <select
                   id="category"
-                  defaultValue="Selecione uma categoria"
+                  value={typeOfFood}
                   onChange={(e) => setTypeOfFood(e.target.value)}
                 >
-                  <option defaultValue="Pratos principais">
-                    Pratos Principais
-                  </option>
+                  <option value="Pratos principais">Pratos Principais</option>
                   <option value="Sobremesas">Sobremesas</option>
                   <option value="Bebidas">Bebidas</option>
                 </select>
@@ -179,6 +189,7 @@ export function NewFood() {
 
               <Price>
                 <Input
+                  required
                   className={!price ? '' : 'notEmpty'}
                   title="Preço"
                   placeholder="R$ 00,00"
@@ -192,6 +203,7 @@ export function NewFood() {
               <div className="textarea-wrapper">
                 <label htmlFor="description">Descrição </label>
                 <Form.TextArea
+                  required
                   onChange={(e) => setDescription(e.target.value)}
                   value={description}
                   placeholder="Fale brevemente sobre o prato, seus ingredientes e composição"
