@@ -13,4 +13,5 @@ export const ButtonBackContainer = styled.button`
   line-height: 0.0001px;
   margin-bottom: 3rem;
   height: fit-content;
+  width: fit-content;
 `

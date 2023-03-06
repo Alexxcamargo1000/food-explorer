@@ -1,13 +1,16 @@
-import * as Dialog from '@radix-ui/react-dialog'
-import { CaretLeft, Plus, UploadSimple, X } from 'phosphor-react'
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
+import { Plus, UploadSimple, X } from 'phosphor-react'
+import * as Dialog from '@radix-ui/react-dialog'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Input } from '../../components/Input'
-import { Loading } from '../../components/Loading'
-import { api } from '../../services/api'
+
 import { formatPriceToCents } from '../../utils/format-price-to-cents'
 import { formatPriceToReal } from '../../utils/format-price-to-real'
 import { IngredientDialog } from '../../components/IngredientDialog'
+import { ButtonBack } from '../../components/ButtonBack'
+import { Loading } from '../../components/Loading'
+import { Input } from '../../components/Input'
+import { useAuth } from '../../hooks/useAuth'
+import { api } from '../../services/api'
 import {
   ButtonDelete,
   ButtonsContainer,
@@ -15,7 +18,6 @@ import {
   NewFoodForm as Form,
   Price,
 } from './styles'
-import { useAuth } from '../../hooks/useAuth'
 
 export interface IngredientProps {
   id: string
@@ -57,12 +59,7 @@ export function EditFood() {
   const [ingredientsActive, setIngredientsActive] = useState<IngredientProps[]>(
     [],
   )
-
   const navigate = useNavigate()
-
-  function backToPage() {
-    navigate(-1)
-  }
 
   function handleCheckedIngredient(ingredientsDialog: IngredientProps[]) {
     setIngredientsActive((prevState) => [...prevState, ...ingredientsDialog])
@@ -192,9 +189,7 @@ export function EditFood() {
 
   return (
     <NewFoodContainer>
-      <button onClick={backToPage} type="button">
-        <CaretLeft size={32} /> voltar
-      </button>
+      <ButtonBack />
 
       <h1>Editar Prato</h1>
 

@@ -17,6 +17,10 @@ export const SingInContainer = styled.div`
 export const SingInLogo = styled.div`
   display: flex;
   gap: 1.5rem;
+
+  img {
+    width: 20rem;
+  }
 `
 
 // Form SignIN

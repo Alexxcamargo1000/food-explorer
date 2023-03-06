@@ -31,6 +31,10 @@ export const CardContainer = styled.div`
 
   img {
     max-width: 11rem; //176px
+    max-height: 11rem; //176px
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 
     @media (max-width: 800px) {
       max-width: 8rem;

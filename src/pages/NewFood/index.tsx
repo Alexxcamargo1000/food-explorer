@@ -1,14 +1,16 @@
-import * as Dialog from '@radix-ui/react-dialog'
-import { CaretLeft, Plus, UploadSimple, X } from 'phosphor-react'
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
+import { Plus, UploadSimple, X } from 'phosphor-react'
+import * as Dialog from '@radix-ui/react-dialog'
 import { useNavigate } from 'react-router-dom'
-import { Input } from '../../components/Input'
-import { Loading } from '../../components/Loading'
-import { api } from '../../services/api'
+
 import { formatPriceToCents } from '../../utils/format-price-to-cents'
-import { IngredientDialog } from '../../components/IngredientDialog'
 import { NewFoodContainer, NewFoodForm as Form, Price } from './styles'
+import { IngredientDialog } from '../../components/IngredientDialog'
+import { ButtonBack } from '../../components/ButtonBack'
+import { Loading } from '../../components/Loading'
 import { useAuth } from '../../hooks/useAuth'
+import { Input } from '../../components/Input'
+import { api } from '../../services/api'
 
 export interface IngredientProps {
   id: string
@@ -22,19 +24,15 @@ export function NewFood() {
   const [name, setName] = useState('')
   const [price, setPrice] = useState('')
   const [search, setSearch] = useState('')
-  const [typeOfFood, setTypeOfFood] = useState('Pratos principais')
   const [image, setImage] = useState<File>()
   const [isLoading, setIsLoading] = useState(false)
+  const [typeOfFood, setTypeOfFood] = useState('Pratos principais')
   const [description, setDescription] = useState('')
   const [ingredients, setIngredients] = useState<IngredientProps[]>([])
   const [ingredientsActive, setIngredientsActive] = useState<IngredientProps[]>(
     [],
   )
   const navigate = useNavigate()
-
-  function backToPage() {
-    navigate(-1)
-  }
 
   function handleCheckedIngredient(ingredientsDialog: IngredientProps[]) {
     setIngredientsActive((prevState) => [...prevState, ...ingredientsDialog])
@@ -137,9 +135,7 @@ export function NewFood() {
   }, [search])
   return (
     <NewFoodContainer>
-      <button onClick={backToPage} type="button">
-        <CaretLeft size={32} /> voltar
-      </button>
+      <ButtonBack />
 
       <h1>Adicionar Prato</h1>
 

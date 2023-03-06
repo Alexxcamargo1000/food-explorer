@@ -1,10 +1,9 @@
-import bannerHomeImg from '../../assets/bannerHome.png'
-
-import { BannerHome, ContainerHome } from './styles'
-
 import { Fragment, useEffect, useState } from 'react'
+
 import { SectionFood } from '../../components/SectionFood'
+import bannerHomeImg from '../../assets/bannerHome.png'
 import { CardFood } from '../../components/CardFood'
+import { BannerHome, ContainerHome } from './styles'
 import { useFood } from '../../hooks/useFood'
 import { api } from '../../services/api'
 
