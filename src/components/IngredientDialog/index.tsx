@@ -24,6 +24,7 @@ interface IngredientDialogProps {
   ingredientsActive: IngredientProps[]
   handleSearch: (search: string) => void
   search: string
+  handleDeleteIngredient: (name: string) => void
 }
 export function IngredientDialog(props: IngredientDialogProps) {
   const [ingredientsChecked, setIngredientChecked] = useState<
@@ -100,6 +101,14 @@ export function IngredientDialog(props: IngredientDialogProps) {
                   />
                   {ingredient.name}
                 </IngredientButton>
+
+                <button
+                  onClick={() => props.handleDeleteIngredient(ingredient.name)}
+                  className="delete"
+                  title="deletar"
+                >
+                  <X size={18} />
+                </button>
               </li>
             ))}
           </ListIngredient>

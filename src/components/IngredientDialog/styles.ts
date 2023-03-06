@@ -67,6 +67,26 @@ export const ListIngredient = styled.ul`
   }
   li {
     display: flex;
+    position: relative;
+
+    .delete {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      border: 0;
+      padding: 2.5px;
+      color: ${(props) => props.theme['tomato-100']};
+      background-color: transparent;
+      cursor: pointer;
+      transition: 0.2s;
+      line-height: 0.0001px;
+      &:hover {
+        color: ${(props) => props.theme['tomato-400']};
+      }
+      &:focus {
+        box-shadow: 0 0 0 2px ${(props) => props.theme['cake-100']};
+      }
+    }
   }
 `
 
@@ -84,6 +104,9 @@ export const IngredientButton = styled.button`
   transition: background 0.2s, color 0.4s;
   background-color: ${(props) => props.theme['cake-200']};
   color: ${(props) => props.theme['dark-500']};
+  &:focus {
+    box-shadow: 0 0 0 2px ${(props) => props.theme['cake-100']};
+  }
 
   &:disabled {
     opacity: 0.3;

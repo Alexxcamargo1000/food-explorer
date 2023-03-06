@@ -140,6 +140,28 @@ export function EditFood() {
     }
   }
 
+  async function handleDeleteIngredient(name: string) {
+    try {
+      const confirm = window.confirm(`deseja deletar a(o) ${name}`)
+      if (!confirm) {
+        return
+      }
+
+      await api.delete(`ingredients/${name}`)
+      const ingredientFilter = ingredients.filter(
+        (ingredient) => ingredient.name !== name,
+      )
+      setIngredients(ingredientFilter)
+      alert('ingrediente deletado')
+    } catch (error: any) {
+      if (error.response) {
+        alert(error.response.data.message)
+      } else {
+        alert('não foi possível deletar o ingrediente')
+      }
+    }
+  }
+
   useEffect(() => {
     async function getIngredients() {
       const response = await api.get(`/ingredients?name=${search}`)
@@ -278,6 +300,7 @@ export function EditFood() {
             handleSearch={handleSearch}
             search={search}
             ingredientsActive={ingredientsActive}
+            handleDeleteIngredient={handleDeleteIngredient}
           />
         </Dialog.Root>
       )}
