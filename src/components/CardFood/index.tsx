@@ -1,4 +1,5 @@
 import { Minus, Plus } from 'phosphor-react'
+import { Link } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
 import { api } from '../../services/api'
 import { formatPriceToReal } from '../../utils/format-price-to-real'
@@ -33,10 +34,11 @@ export function CardFood({
   return (
     <CardContainer>
       {user?.admin ? <ButtonEdit slug={slug} /> : <ButtonFavorite />}
-
-      <img src={`${api.defaults.baseURL}/foods/files/${image}`} alt="" />
+      <Link to={`/food/${slug}`}>
+        <img src={`${api.defaults.baseURL}/foods/files/${image}`} alt="" />
+      </Link>
       <Title to={`/food/${slug}`}>
-        {title} {'>'}{' '}
+        {title} {'>'}
       </Title>
       <Description>{description}</Description>
       <Price>{priceFormatted}</Price>
