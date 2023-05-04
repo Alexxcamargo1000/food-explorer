@@ -15,6 +15,7 @@ export const CardContainer = styled.div`
   background-color: ${(props) => props.theme['dark-200']};
   border: 1px solid ${(props) => props.theme['dark-300']};
   flex: none;
+  min-height: 400px;
 
   @media (max-width: 800px) {
     min-height: 25rem;
@@ -32,9 +33,12 @@ export const CardContainer = styled.div`
   img {
     max-width: 11rem; //176px
     max-height: 11rem; //176px
+    min-width: 11rem; //176px
+    min-height: 11rem; //176px
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
+    border-radius: 9999px;
 
     @media (max-width: 800px) {
       max-width: 8rem;
