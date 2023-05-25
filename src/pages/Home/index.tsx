@@ -6,6 +6,7 @@ import { CardFood } from '../../components/CardFood'
 import { BannerHome, ContainerHome } from './styles'
 import { useFood } from '../../hooks/useFood'
 import { api } from '../../services/api'
+import { EmptyFood } from '../../components/EmptyFood'
 
 interface TypeOfFood {
   id: string
@@ -40,6 +41,8 @@ export function Home() {
             <p>Sinta o cuidado do preparo com ingredientes selecionados</p>
           </div>
         </BannerHome>
+
+        {foods.length < 1 && <EmptyFood />}
 
         {typeFood &&
           typeFood.map((section) => {
