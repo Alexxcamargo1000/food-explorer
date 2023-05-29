@@ -276,4 +276,9 @@ export const ButtonDelete = styled.button`
   font-size: ${(props) => props.theme.fontsSize.sm};
   font-weight: 500;
   cursor: pointer;
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
 `

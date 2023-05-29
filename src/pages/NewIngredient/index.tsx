@@ -16,6 +16,7 @@ export function NewIngredient() {
   const { user } = useAuth()
   const navigate = useNavigate()
   const [ingredientName, setIngredientName] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
   const [image, setImage] = useState<File>()
 
   function handleAddImage(event: ChangeEvent<HTMLInputElement>) {
@@ -28,20 +29,24 @@ export function NewIngredient() {
 
   async function handleSubmitNewIngredient(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
+    setIsLoading(true)
     if (!ingredientName) {
       return
     }
     try {
-      await api.post(
-        'ingredients',
-        {
-          name: ingredientName,
-          image,
-        },
-        { headers: { 'Content-Type': 'multipart/form-data' } },
-      )
+      await api
+        .post(
+          'ingredients',
+          {
+            name: ingredientName,
+            image,
+          },
+          { headers: { 'Content-Type': 'multipart/form-data' } },
+        )
+        .finally(() => setIsLoading(false))
       alert('ingrediente criado')
     } catch (error: any) {
+      setIsLoading(false)
       if (error.response) {
         alert(error.response.data.message)
       } else {
@@ -87,7 +92,9 @@ export function NewIngredient() {
           </InputImageIngredient>
         </div>
 
-        <ButtonSaveIngredient type="submit">Salvar</ButtonSaveIngredient>
+        <ButtonSaveIngredient disabled={isLoading} type="submit">
+          Salvar
+        </ButtonSaveIngredient>
       </FormIngredient>
     </NewIngredientContainer>
   )

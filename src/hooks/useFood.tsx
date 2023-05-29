@@ -1,10 +1,4 @@
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from 'react'
+import { createContext, ReactNode, useContext, useState } from 'react'
 import { api } from '../services/api'
 
 interface FoodProviderProps {
@@ -35,26 +29,63 @@ interface foodIngredientProps {
   category?: string
 }
 
+interface TypeOfFood {
+  id: string
+  name: string
+}
+
 const FoodContext = createContext({
-  getFoods: (search?: string) => {},
+  getFoods: async (search?: string) => {},
+  getTypeFood: async (search?: string) => {},
+  typeFood: [] as TypeOfFood[],
   foods: [] as foodIngredientProps[],
+  isLoading: true,
 })
 
 function FoodProvider({ children }: FoodProviderProps) {
   const [foods, setFoods] = useState<foodIngredientProps[]>([])
+  const [typeFood, setTypeFood] = useState<TypeOfFood[]>([])
+
+  const [isLoading, setIsLoading] = useState(false)
 
   async function getFoods(search = '') {
-    const response = await api.get(`/foods?search=${search}`)
+    setIsLoading(true)
+    const response = await api
+      .get(`/foods?search=${search}`)
+      .catch((err) => {
+        console.log(err)
+        alert(err.message)
+        setIsLoading(false)
+      })
+      .finally(() => setIsLoading(false))
+
+    if (!response?.data) {
+      return setFoods([])
+    }
 
     setFoods(response.data)
   }
 
-  useEffect(() => {
-    getFoods()
-  }, [])
+  async function getTypeFood() {
+    setIsLoading(true)
+    const response = await api
+      .get('/type-food')
+      .catch((err) => {
+        alert(err.message)
+      })
+      .finally(() => setIsLoading(false))
+
+    if (!response?.data) {
+      return setTypeFood([])
+    }
+
+    setTypeFood(response.data)
+  }
 
   return (
-    <FoodContext.Provider value={{ foods, getFoods }}>
+    <FoodContext.Provider
+      value={{ foods, getFoods, isLoading, getTypeFood, typeFood }}
+    >
       {children}
     </FoodContext.Provider>
   )

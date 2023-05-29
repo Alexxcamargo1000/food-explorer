@@ -85,7 +85,8 @@ export function IngredientDialog(props: IngredientDialogProps) {
             onChange={(e) => props.handleSearch(e.target.value)}
           />
         </SearchContainer>
-        <Dialog.Title className="DialogTitle">Ingredients</Dialog.Title>
+        <Dialog.Title className="DialogTitle">Ingredientes</Dialog.Title>
+        {props.ingredients.length < 1 && <p>Adicione um ingrediente</p>}
         <div>
           <ListIngredient>
             {props.ingredients.map((ingredient) => (

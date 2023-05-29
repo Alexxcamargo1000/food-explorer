@@ -59,6 +59,8 @@ export function EditFood() {
   const [ingredientsActive, setIngredientsActive] = useState<IngredientProps[]>(
     [],
   )
+
+  const [isDisable, setIsDisable] = useState(false)
   const navigate = useNavigate()
 
   function handleCheckedIngredient(ingredientsDialog: IngredientProps[]) {
@@ -87,6 +89,7 @@ export function EditFood() {
 
   async function handleUpdateFood(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
+    setIsDisable(true)
 
     const priceInCents = formatPriceToCents(price)
 
@@ -114,6 +117,8 @@ export function EditFood() {
       } else {
         alert('não foi possível atualizar o prato')
       }
+    } finally {
+      setIsDisable(false)
     }
   }
 
@@ -201,7 +206,7 @@ export function EditFood() {
             <Form.Fieldset>
               <div>
                 <span>Imagem do prato</span>
-                <Form.InputImage className={!image ? '' : 'notEmpty'}>
+                <Form.InputImage>
                   <label htmlFor="image">
                     <UploadSimple size={32} />
                     <span>Selecione imagem</span>
@@ -283,10 +288,14 @@ export function EditFood() {
             </Form.Fieldset>
 
             <ButtonsContainer>
-              <ButtonDelete onClick={handleDeleteFood} type="button">
+              <ButtonDelete
+                disabled={isDisable}
+                onClick={handleDeleteFood}
+                type="button"
+              >
                 Excluir prato
               </ButtonDelete>
-              <Form.Button>Salvar alterações</Form.Button>
+              <Form.Button disabled={isDisable}>Salvar alterações</Form.Button>
             </ButtonsContainer>
           </Form.Root>
           <IngredientDialog

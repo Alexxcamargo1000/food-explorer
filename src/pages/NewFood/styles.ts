@@ -217,7 +217,7 @@ const Button = styled.button`
     background-color: ${(props) => props.theme['tomato-400']};
   }
 
-  &:hover {
+  &:hover:not(:disabled) {
     background-color: ${(props) => props.theme['tomato-200']};
   }
 `

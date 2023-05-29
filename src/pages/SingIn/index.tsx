@@ -5,7 +5,7 @@ import { SingInContainer, SingInForm, SingInLogo } from './styles'
 import logoFoodExplorer from '../../assets/logo.svg'
 
 export function SingInPage() {
-  const { signIn } = useAuth()
+  const { signIn, isLoading } = useAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -33,7 +33,11 @@ export function SingInPage() {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <SingInForm.Button onClick={handleSignIn} type="submit">
+        <SingInForm.Button
+          onClick={handleSignIn}
+          type="submit"
+          disabled={isLoading}
+        >
           Entrar
         </SingInForm.Button>
         <SingInForm.FormLink to="/register">

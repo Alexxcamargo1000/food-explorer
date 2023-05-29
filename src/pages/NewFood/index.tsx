@@ -26,6 +26,7 @@ export function NewFood() {
   const [search, setSearch] = useState('')
   const [image, setImage] = useState<File>()
   const [isLoading, setIsLoading] = useState(false)
+  const [isDisable, setDisable] = useState(false)
   const [typeOfFood, setTypeOfFood] = useState('Pratos principais')
   const [description, setDescription] = useState('')
   const [ingredients, setIngredients] = useState<IngredientProps[]>([])
@@ -83,7 +84,7 @@ export function NewFood() {
 
   async function handleSubmitFood(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-
+    setDisable(true)
     const priceInCents = formatPriceToCents(price)
 
     if (ingredientsActive.length === 0) {
@@ -97,18 +98,22 @@ export function NewFood() {
     const ingredientsNamesString = ingredientsNames.toString()
 
     try {
-      await api.post(
-        'foods',
-        {
-          name,
-          description,
-          priceInCents,
-          typeFood: typeOfFood,
-          image,
-          ingredients: ingredientsNamesString,
-        },
-        { headers: { 'Content-Type': 'multipart/form-data' } },
-      )
+      await api
+        .post(
+          'foods',
+          {
+            name,
+            description,
+            priceInCents,
+            typeFood: typeOfFood,
+            image,
+            ingredients: ingredientsNamesString,
+          },
+          { headers: { 'Content-Type': 'multipart/form-data' } },
+        )
+        .finally(() => {
+          setDisable(false)
+        })
       alert('novo prato criado')
       navigate('/')
     } catch (error: any) {
@@ -125,9 +130,26 @@ export function NewFood() {
       navigate('/')
     }
     async function getIngredients() {
-      const response = await api.get(`/ingredients?name=${search}`)
-      setIngredients(response.data)
       setIsLoading(true)
+      const response = await api
+        .get(`/ingredients?name=${search}`)
+        .catch((err) => {
+          console.log(err.message)
+          alert(err.message)
+
+          return navigate('/')
+        })
+        .then((data) => {
+          setIsLoading(false)
+          return data
+        })
+        .finally(() => {
+          setIsLoading(false)
+        })
+      if (!response?.data.length) {
+        return console.log('nenhum ingredient')
+      }
+      setIngredients(response.data)
     }
 
     getIngredients()
@@ -139,7 +161,7 @@ export function NewFood() {
 
       <h1>Adicionar Prato</h1>
 
-      {!isLoading ? (
+      {isLoading ? (
         <Loading />
       ) : (
         <Dialog.Root>
@@ -229,7 +251,7 @@ export function NewFood() {
               </div>
             </Form.Fieldset>
 
-            <Form.Button>Salvar alterações</Form.Button>
+            <Form.Button disabled={isDisable}>Salvar alterações</Form.Button>
           </Form.Root>
           <IngredientDialog
             handleCheckedIngredient={handleCheckedIngredient}

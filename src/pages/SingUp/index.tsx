@@ -2,14 +2,18 @@ import { FormEvent, useState } from 'react'
 import { Input } from '../../components/Input'
 import { api } from '../../services/api'
 import { SingUpContainer, SingUpForm, SingUpLogo } from './styles'
+import { useNavigate } from 'react-router-dom'
 
 export function SingUpPage() {
+  const navigate = useNavigate()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [isDisable, setIsDisable] = useState(false)
 
   async function handleCreateNewUser(e: FormEvent) {
     e.preventDefault()
+    setIsDisable(true)
     try {
       await api.post('users', {
         name,
@@ -23,6 +27,9 @@ export function SingUpPage() {
       } else {
         alert('não foi possível cadastrar')
       }
+    } finally {
+      setIsDisable(false)
+      navigate('/')
     }
   }
 
@@ -67,7 +74,9 @@ export function SingUpPage() {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <SingUpForm.Button type="submit">Criar conta</SingUpForm.Button>
+        <SingUpForm.Button disabled={isDisable} type="submit">
+          Criar conta
+        </SingUpForm.Button>
         <SingUpForm.FormLink to="/">Já tenho uma conta</SingUpForm.FormLink>
       </SingUpForm.Container>
     </SingUpContainer>

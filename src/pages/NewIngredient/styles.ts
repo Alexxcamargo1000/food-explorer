@@ -75,4 +75,14 @@ export const ButtonSaveIngredient = styled.button`
   border: 0;
   color: ${(props) => props.theme['dark-1000']};
   margin-top: 1rem;
+  transition: filter 0.2s;
+
+  &:hover:not(:disabled) {
+    filter: brightness(0.7);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
 `

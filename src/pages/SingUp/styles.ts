@@ -61,8 +61,13 @@ const Button = styled.button`
   transition: background-color 0.2s;
   border-radius: 4px;
 
-  &:hover {
+  &:hover:not(:disabled) {
     background-color: ${(props) => props.theme['tomato-200']};
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
   }
 `
 

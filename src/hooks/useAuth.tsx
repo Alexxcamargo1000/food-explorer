@@ -28,15 +28,22 @@ const AuthContext = createContext({
   signIn: (email: string, password: string) => {},
   user: {} as User | undefined,
   signOut: () => {},
+  isLoading: false,
 })
 
 function AuthProvider({ children }: AuthProviderProps) {
   const [data, setData] = useState<dataProps>({})
+  const [isLoading, setIsLoading] = useState(false)
 
   async function signIn(email: string, password: string) {
+    setIsLoading(true)
     try {
-      const response = await api.post('/session', { email, password })
-      const { user, token } = response.data
+      const response = await api
+        .post('/session', { email, password })
+        .finally(() => {
+          setIsLoading(false)
+        })
+      const { user, token } = response?.data
 
       localStorage.setItem('@rocketFood:user', JSON.stringify(user))
       localStorage.setItem('@rocketFood:token', token)
@@ -74,7 +81,9 @@ function AuthProvider({ children }: AuthProviderProps) {
   }, [])
 
   return (
-    <AuthContext.Provider value={{ signIn, user: data.user, signOut }}>
+    <AuthContext.Provider
+      value={{ signIn, user: data.user, signOut, isLoading }}
+    >
       {children}
     </AuthContext.Provider>
   )
