@@ -37,7 +37,6 @@ interface foodProps {
   updated_at: string
   user_id: string
 }
-
 interface foodWithIngredients {
   food: foodProps
   ingredients: IngredientProps[]
