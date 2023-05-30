@@ -130,7 +130,6 @@ export function NewFood() {
       navigate('/')
     }
     async function getIngredients() {
-      setIsLoading(true)
       const response = await api
         .get(`/ingredients?name=${search}`)
         .catch((err) => {
@@ -143,9 +142,7 @@ export function NewFood() {
           setIsLoading(false)
           return data
         })
-        .finally(() => {
-          setIsLoading(false)
-        })
+
       if (!response?.data.length) {
         return console.log('nenhum ingredient')
       }

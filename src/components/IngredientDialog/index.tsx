@@ -26,6 +26,7 @@ interface IngredientDialogProps {
   search: string
   handleDeleteIngredient: (name: string) => void
 }
+
 export function IngredientDialog(props: IngredientDialogProps) {
   const [ingredientsChecked, setIngredientChecked] = useState<
     IngredientProps[]
