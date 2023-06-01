@@ -30,6 +30,16 @@ Essa variáveis é usada para definir a URL do backend, se o backend tiver na su
   npm run dev
 ```
 
+## Rota admin
+
+Para criar um novo administrador use essa rota:
+
+```bash
+  /register/admin
+```
+
+
+
 ## Funcionalidades
 
 O front-end da aplicação Explorer Food possui as seguintes funcionalidades:
