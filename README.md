@@ -5,7 +5,7 @@ Este é o front-end da aplicação Explorer Food, desenvolvida em React.js utili
 
 ## Preview
 
-![Preview da tela inicial](https://imgur.com/FoJrTiQ)
+![Preview da tela inicial](https://i.imgur.com/FoJrTiQ.png)
 ## Instalação
 
 Siga os passos abaixo para configurar e executar o front-end da aplicação:
